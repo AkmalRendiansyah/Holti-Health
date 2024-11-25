@@ -8,4 +8,13 @@
     <string name="title_profile">Profile</string>
     <string name="Scan">Scan</string>
     <string name="scan">Scan</string>
+    <string name="signup">Daftar</string>
+    <string name="login">Masuk</string>
+    <string name="title_welcome_page">Selamat datang di Holti Health!</string>
+    <string name="message_welcome_page">Temukan solusi terbaik untuk melindungi tanaman cabai Anda dari penyakit. Dengan Holti Health, panen sehat bukan lagi sekadar harapan!</string>
+    <string name="title_welcome_page1">Selamat Datang, Petani Cerdas!</string>
+    <string name="message_welcome_page1">Holti Health hadir untuk membantu Anda mengenali dan mengatasi penyakit pada tanaman cabai. Tingkatkan hasil panen Anda dengan teknologi pintar!</string>
+    <string name="title_welcome_page2">Mari Mulai Bersama Holti Health!</string>
+    <string name="message_welcome_page2">Tekan tombol di bawah untuk memulai analisis tanaman cabai Anda. Bersama Holti Health, langkah kecil Anda hari ini membawa panen besar esok hari!</string>
+
 </resources>
