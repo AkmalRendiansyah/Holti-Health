@@ -13,7 +13,11 @@
         android:theme="@style/Theme.HoltiHealth"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+                android:name=".MainActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.welcome.WelcomeActivity"
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
