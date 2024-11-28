@@ -19,6 +19,9 @@
         android:theme="@style/Theme.HoltiHealth"
         tools:targetApi="31">
         <activity
+            android:name=".ui.scan.ResultActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.scan.PreviewActivity"
             android:exported="false" />
         <activity
