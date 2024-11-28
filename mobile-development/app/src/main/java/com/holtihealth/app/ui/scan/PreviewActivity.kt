@@ -1,6 +1,6 @@
 package com.holtihealth.app.ui.scan
 
-import ImageClassifierHelper
+
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri

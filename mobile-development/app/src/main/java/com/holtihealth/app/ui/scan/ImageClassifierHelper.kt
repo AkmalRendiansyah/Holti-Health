@@ -1,3 +1,5 @@
+package com.holtihealth.app.ui.scan
+
 import android.content.Context
 import android.graphics.Bitmap
 import com.holtihealth.app.ml.ChiliDiseaseDetection
