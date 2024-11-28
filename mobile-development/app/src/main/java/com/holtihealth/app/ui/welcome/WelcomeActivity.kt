@@ -9,7 +9,6 @@ import androidx.core.view.WindowInsetsCompat
 import com.holtihealth.app.MainActivity
 import com.holtihealth.app.R
 import com.holtihealth.app.databinding.ActivityWelcomeBinding
-import com.holtihealth.app.ui.scan.ScanFragment
 
 class WelcomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWelcomeBinding
@@ -17,6 +16,9 @@ class WelcomeActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        supportActionBar?.hide()
+
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
