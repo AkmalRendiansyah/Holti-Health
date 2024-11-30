@@ -1,6 +1,5 @@
 package com.holtihealth.app.ui.scan
 
-
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -21,11 +20,12 @@ class PreviewActivity : AppCompatActivity(), ImageClassifierHelper.ClassifierLis
         binding = ActivityPreviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         imageClassifierHelper = ImageClassifierHelper(
             context = this,
             classifierListener = this
         )
-
+        
         val imageUriString = intent.getStringExtra("imageUri")
         val imageUri = Uri.parse(imageUriString)
 
@@ -35,10 +35,12 @@ class PreviewActivity : AppCompatActivity(), ImageClassifierHelper.ClassifierLis
 
         binding.buttonAnalyzeImage.setOnClickListener {
             imageUri?.let { uri -> analyzeImage(uri) }
+
         }
     }
 
     private fun analyzeImage(uri: Uri) {
+
         try {
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
             if (bitmap != null) {
