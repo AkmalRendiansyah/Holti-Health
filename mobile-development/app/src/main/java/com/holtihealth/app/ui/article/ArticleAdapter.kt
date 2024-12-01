@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.holtihealth.app.R
 import com.holtihealth.app.database.Article
 import com.holtihealth.app.databinding.ItemarticleBinding
 

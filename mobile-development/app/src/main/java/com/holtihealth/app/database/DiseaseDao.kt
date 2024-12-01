@@ -7,9 +7,10 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
-interface ArticleDao {
-    @Query("SELECT * from article ORDER BY id ASC")
-    fun getAllArticles(): LiveData<List<Article>>
+interface DiseaseDao {
+    @Query("SELECT * FROM Disease WHERE name = :name LIMIT 1")
+    fun getDiseaseByName(name: String): LiveData<Disease?>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertAll(articles: List<Article>)
+    suspend fun insertAll(diseases: List<Disease>)
 }
