@@ -10,10 +10,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 
-@Database(entities = [Article::class, Disease::class], version = 1, exportSchema = false)
+@Database(entities = [Article::class, Disease::class, History::class], version = 1, exportSchema = false)
 abstract class HoltiDatabase : RoomDatabase() {
     abstract fun articleDao(): ArticleDao
     abstract fun diseaseDao(): DiseaseDao
+    abstract fun historyDao(): HistoryDao
 
     companion object {
         @Volatile

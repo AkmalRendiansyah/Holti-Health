@@ -4,12 +4,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.holtihealth.app.database.ArticleRepository
 import com.holtihealth.app.database.DiseaseRepository
+import com.holtihealth.app.database.HistoryRepository
 import com.holtihealth.app.ui.article.ArticleViewModel
+import com.holtihealth.app.ui.history.HistoryViewModel
 import com.holtihealth.app.ui.scan.ResultViewModel
 
 class ViewModelFactory(
     private val diseaseRepository: DiseaseRepository? = null,
-    private val articleRepository: ArticleRepository? = null
+    private val articleRepository: ArticleRepository? = null,
+    private val historyRepository: HistoryRepository? = null
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -19,6 +22,9 @@ class ViewModelFactory(
         } else if (modelClass.isAssignableFrom(ArticleViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return ArticleViewModel(articleRepository!!) as T
+        } else if (modelClass.isAssignableFrom(HistoryViewModel::class.java)){
+            @Suppress("UNCHECKED_CAST")
+            return  HistoryViewModel(historyRepository!!) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
