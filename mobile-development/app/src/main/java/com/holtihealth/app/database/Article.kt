@@ -10,7 +10,9 @@ data class Article (
     val title: String,
     var description: String,
     var image: String,
+
     var solusion:String,
     var cause:String,
     var symptoms:String
+
 )

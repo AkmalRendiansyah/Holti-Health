@@ -8,6 +8,7 @@ object InitialDataSource {
         return listOf(
             Article(
                 title = "Penyakit Antraknos pada Cabai",
+
                 description = "Antraknos pada cabai adalah penyakit yang disebabkan oleh jamur Colletotrichum spp., dengan gejala khas berupa bercak melingkar yang cekung, berwarna cokelat kehitaman pada buah. Penyakit ini dapat menyebabkan kerugian ekonomi yang signifikan karena menurunkan kualitas dan kuantitas panen.",
                 image = "https://www.infarm.co.id/uploads/article/Xgg0sUuJn8IqiQHSGgWonRojj31w7moyiXdSVLOa.jpg",
                 solusion = """
@@ -96,6 +97,20 @@ object InitialDataSource {
             4. Penurunan kemampuan fotosintesis akibat kerusakan daun.
             5. Tanaman terlihat lemah, pertumbuhan terhambat, dan hasil panen menurun.
         """.trimIndent()
+=======
+                description = "Penyakit Antraknos pada cabai disebabkan oleh jamur Colletotrichum spp. yang menyerang buah cabai, menyebabkan busuk buah.",
+                image = "https://www.infarm.co.id/uploads/article/Xgg0sUuJn8IqiQHSGgWonRojj31w7moyiXdSVLOa.jpg"
+            ),
+            Article(
+                title = "Penyakit Layu Fusarium pada Cabai",
+                description = "Penyakit Layu Fusarium disebabkan oleh jamur Fusarium oxysporum yang menyebabkan tanaman cabai layu dan mati mendadak.",
+                image = "https://trubus.id/wp-content/uploads/2020/02/Trubus-Edisi-603-Februari-2020-Highrest-78-2.jpg"
+            ),
+            Article(
+                title = "Penyakit Bercak Daun Cabai",
+                description = "Penyakit bercak daun cabai disebabkan oleh beberapa jenis jamur yang menyebabkan bercak pada daun cabai dan mengurangi kualitas hasil panen.",
+                image = "https://asset.kompas.com/crops/PecRmY2jQCZ0CWNcMRmdvinTr6k=/0x77:375x452/340x340/data/photo/2022/11/28/63847b2635b1f.jpg"
+
             )
         )
     }

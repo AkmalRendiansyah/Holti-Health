@@ -8,4 +8,10 @@ class ArticleRepository(private val articleDao: ArticleDao) {
     fun getArticleDetail(eventId: Int): LiveData<Article> {
         return articleDao.getEventById(eventId)
     }
+
+class ArticleRepository(private val articleDao: ArticleDao) {
+
+    fun getAllArticles() = articleDao.getAllArticles()
+
+
 }

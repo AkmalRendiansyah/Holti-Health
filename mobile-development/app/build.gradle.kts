@@ -62,12 +62,10 @@ dependencies {
     implementation (libs.androidx.camera.camera2)
     implementation (libs.androidx.camera.lifecycle)
     implementation (libs.androidx.camera.view)
-<<<<<<< HEAD
 
-=======
     
     implementation("org.tensorflow:tensorflow-lite-task-vision:0.1.0")
->>>>>>> 3c31ef7fea4d56d6c506633e9851bf5db9a5f3e2
+
 
     implementation("androidx.room:room-runtime:2.5.2")
     implementation("androidx.room:room-ktx:2.5.2")
@@ -81,6 +79,12 @@ dependencies {
     implementation("com.google.android.gms:play-services-tflite-gpu:16.2.0") // Dukungan GPU dari Google
     implementation("org.tensorflow:tensorflow-lite-gpu:2.11.0")
 
+
+    implementation ("org.tensorflow:tensorflow-lite:2.13.0")
+    implementation("com.google.android.gms:play-services-tflite-support:16.1.0")
+    implementation("org.tensorflow:tensorflow-lite-task-vision-play-services:0.4.2")
+    implementation("com.google.android.gms:play-services-tflite-gpu:16.2.0") // Dukungan GPU dari Google
+    implementation("org.tensorflow:tensorflow-lite-gpu:2.11.0")
 
 
 }

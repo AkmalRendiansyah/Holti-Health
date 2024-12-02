@@ -21,6 +21,8 @@
     <string name="retake">Retake</string>
     <string name="image_scan">image scan</string>
     <string name="text_result">text_result</string>
+
     <string name="title">Title</string>
+
 
 </resources>
