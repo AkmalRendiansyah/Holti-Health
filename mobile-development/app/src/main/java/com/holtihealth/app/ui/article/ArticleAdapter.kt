@@ -1,14 +1,15 @@
 package com.holtihealth.app.ui.article
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.holtihealth.app.R
 import com.holtihealth.app.database.Article
 import com.holtihealth.app.databinding.ItemarticleBinding
 
-class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
+class ArticleAdapter (private val onArticleClick: (Article) -> Unit): RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
 
     private val articles = ArrayList<Article>()
 
@@ -26,6 +27,9 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val article = articles[position]
         holder.bind(articles[position])
+        holder.itemView.setOnClickListener {
+            onArticleClick(article)
+        }
     }
 
     override fun getItemCount(): Int = articles.size
@@ -40,5 +44,18 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() 
                 .load(article.image) // URL gambar dari database
                 .into(binding.ivArticle)
         }
+    }
+    companion object {
+        val DIFF_CALLBACK: DiffUtil.ItemCallback<Article> =
+            object : DiffUtil.ItemCallback<Article>() {
+                override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
+                    return oldItem.id == newItem.id
+                }
+
+                @SuppressLint("DiffUtilEquals")
+                override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
+                    return oldItem == newItem
+                }
+            }
     }
 }

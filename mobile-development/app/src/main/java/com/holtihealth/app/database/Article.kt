@@ -1,21 +1,16 @@
 package com.holtihealth.app.database
 
-import android.os.Parcelable
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlinx.parcelize.Parcelize
 
-@Entity
-@Parcelize
+@Entity(tableName = "article")
 data class Article (
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    var id: Int = 0,
-    @ColumnInfo(name = "title")
-    var title: String? = null,
-    @ColumnInfo(name = "description")
-    var description: String? = null,
-    @ColumnInfo(name = "image")
-    var image: String? = null
-) :Parcelable
+    val id: Int = 0,
+    val title: String,
+    var description: String,
+    var image: String,
+    var solusion:String,
+    var cause:String,
+    var symptoms:String
+)
