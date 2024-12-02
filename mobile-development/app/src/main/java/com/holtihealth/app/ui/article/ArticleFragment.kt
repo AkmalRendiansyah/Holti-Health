@@ -44,7 +44,6 @@ class ArticleFragment : Fragment() {
             intent.putExtra("ARTICLE_ID", event.id)
             startActivity(intent)
         }
-        articleAdapter = ArticleAdapter()
 
         binding.rvArticle.apply {
             layoutManager = LinearLayoutManager(context)
