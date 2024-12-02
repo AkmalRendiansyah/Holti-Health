@@ -12,4 +12,6 @@ interface ArticleDao {
     fun getAllArticles(): LiveData<List<Article>>
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(articles: List<Article>)
+    @Query("SELECT * FROM article WHERE id = :articleId")
+    fun getEventById(articleId: Int): LiveData<Article>
 }
