@@ -6,13 +6,17 @@ import com.holtihealth.app.database.ArticleRepository
 import com.holtihealth.app.database.DiseaseRepository
 import com.holtihealth.app.database.HistoryRepository
 import com.holtihealth.app.ui.article.ArticleViewModel
+import com.holtihealth.app.ui.detailArticle.DetailArticleViewModel
+import com.holtihealth.app.ui.detailHistory.DetailHistoryViewModel
 import com.holtihealth.app.ui.history.HistoryViewModel
 import com.holtihealth.app.ui.scan.ResultViewModel
 
 class ViewModelFactory(
     private val diseaseRepository: DiseaseRepository? = null,
     private val articleRepository: ArticleRepository? = null,
-    private val historyRepository: HistoryRepository? = null
+    private val historyRepository: HistoryRepository? = null,
+    private val articleId: Int? = null,
+    private val historyId: Int? = null
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -25,6 +29,12 @@ class ViewModelFactory(
         } else if (modelClass.isAssignableFrom(HistoryViewModel::class.java)){
             @Suppress("UNCHECKED_CAST")
             return  HistoryViewModel(historyRepository!!) as T
+        } else if (modelClass.isAssignableFrom(DetailArticleViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return DetailArticleViewModel(articleRepository!!, articleId!!) as T
+        } else if (modelClass.isAssignableFrom(DetailHistoryViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return  DetailHistoryViewModel(historyRepository!!, historyId!!) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

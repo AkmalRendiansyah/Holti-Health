@@ -4,20 +4,14 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.holtihealth.app.database.Article
 import com.holtihealth.app.databinding.ItemarticleBinding
 
-class ArticleAdapter (private val onArticleClick: (Article) -> Unit): RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
-
-    private val articles = ArrayList<Article>()
-
-    fun setArticles(newArticles: List<Article>) {
-        articles.clear()
-        articles.addAll(newArticles)
-        notifyDataSetChanged()
-    }
+class ArticleAdapter(private val onArticleClick: (Article) -> Unit) :
+    ListAdapter<Article, ArticleAdapter.ArticleViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         val binding = ItemarticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -25,14 +19,12 @@ class ArticleAdapter (private val onArticleClick: (Article) -> Unit): RecyclerVi
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
-        val article = articles[position]
-        holder.bind(articles[position])
+        val articleItem = getItem(position)
+        holder.bind(articleItem)
         holder.itemView.setOnClickListener {
-            onArticleClick(article)
+            onArticleClick(articleItem)
         }
     }
-
-    override fun getItemCount(): Int = articles.size
 
     class ArticleViewHolder(private val binding: ItemarticleBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(article: Article) {
@@ -41,10 +33,11 @@ class ArticleAdapter (private val onArticleClick: (Article) -> Unit): RecyclerVi
 
             // Load image with Glide
             Glide.with(binding.root.context)
-                .load(article.image) // URL gambar dari database
+                .load(article.image)
                 .into(binding.ivArticle)
         }
     }
+
     companion object {
         val DIFF_CALLBACK: DiffUtil.ItemCallback<Article> =
             object : DiffUtil.ItemCallback<Article>() {

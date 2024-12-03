@@ -68,7 +68,7 @@ dependencies {
     implementation("androidx.room:room-ktx:2.5.2")
     ksp("androidx.room:room-compiler:2.5.2")
 
-    implementation ("com.github.bumptech.glide:glide:4.15.1")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 
     implementation ("org.tensorflow:tensorflow-lite:2.13.0")
     implementation("com.google.android.gms:play-services-tflite-support:16.1.0")

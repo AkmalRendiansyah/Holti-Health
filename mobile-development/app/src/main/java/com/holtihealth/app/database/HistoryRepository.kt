@@ -12,7 +12,7 @@ class HistoryRepository(private val historyDao: HistoryDao) {
 
     fun getAllHistoryWithDisease(): LiveData<List<HistoryWithDisease>> = historyDao.getAllHistoryWithDisease()
 
-    fun getHistoryById(historyId: Int): LiveData<HistoryWithDisease> {
+    fun getHistoryDetail(historyId: Int): LiveData<HistoryWithDisease> {
         return historyDao.getHistoryById(historyId)
     }
 }

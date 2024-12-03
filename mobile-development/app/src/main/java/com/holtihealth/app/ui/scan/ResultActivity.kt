@@ -1,5 +1,6 @@
 package com.holtihealth.app.ui.scan
 
+import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -12,7 +13,12 @@ import com.holtihealth.app.MyApplication
 import com.holtihealth.app.ViewModelFactory
 import com.holtihealth.app.database.History
 import com.holtihealth.app.databinding.ActivityResultBinding
+import com.holtihealth.app.formatToIndonesianTime
+import com.holtihealth.app.saveImageToInternalStorage
 import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -55,9 +61,13 @@ class ResultActivity : AppCompatActivity() {
 
                 val formattedTime = formatToIndonesianTime((System.currentTimeMillis()))
 
+                val imageUri = Uri.parse(imageUriString)
+                val fileName = "result_image_${System.currentTimeMillis()}.jpg"
+                val imagePath = saveImageToInternalStorage(this, imageUri, fileName)
+
                 val history = History(
                     scanTime = formattedTime,
-                    photoUri = imageUriString ?: "",
+                    photoUri = imagePath ?: "",
                     diseaseId = disease.id
                 )
                 lifecycleScope.launch {
@@ -69,10 +79,5 @@ class ResultActivity : AppCompatActivity() {
                 binding.controlText.text = "Data pengendalian tidak ditemukan."
             }
         })
-    }
-
-    private fun formatToIndonesianTime(timestamp: Long): String{
-        val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale("id", "ID"))
-        return dateFormat.format(timestamp)
     }
 }

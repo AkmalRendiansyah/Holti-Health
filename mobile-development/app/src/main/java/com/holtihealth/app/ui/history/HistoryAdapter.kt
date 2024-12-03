@@ -6,10 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.holtihealth.app.database.History
 import com.holtihealth.app.database.HistoryWithDisease
 import com.holtihealth.app.databinding.ItemHistoryBinding
 
-class HistoryAdapter :
+class HistoryAdapter(private  val onHistoryClick: (HistoryWithDisease) -> Unit) :
     ListAdapter<HistoryWithDisease, HistoryAdapter.HistoryViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
@@ -20,8 +21,12 @@ class HistoryAdapter :
     }
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
-        val historyWithDisease = getItem(position)
-        holder.bind(historyWithDisease)
+        val historyItem = getItem(position)
+        holder.bind(historyItem)
+        holder.itemView.setOnClickListener{
+            onHistoryClick(historyItem)
+        }
+
     }
 
     class HistoryViewHolder(private val binding: ItemHistoryBinding) :
@@ -51,7 +56,6 @@ class HistoryAdapter :
                     oldItem: HistoryWithDisease,
                     newItem: HistoryWithDisease
                 ): Boolean {
-                    // Check if items are the same using unique identifiers
                     return oldItem.history.id == newItem.history.id
                 }
 
@@ -59,7 +63,6 @@ class HistoryAdapter :
                     oldItem: HistoryWithDisease,
                     newItem: HistoryWithDisease
                 ): Boolean {
-                    // Check if contents are identical
                     return oldItem == newItem
                 }
             }

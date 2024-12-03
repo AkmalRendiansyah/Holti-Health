@@ -105,21 +105,87 @@ object InitialDataSource {
 
         return listOf(
             Disease(
-                name = "Kutu Kebul",
+                name = "Sehat",
                 symptoms = """
-            Penyakit ini menimbulkan kerusakan pada daun, batang, dan akar. Gejala serangan mulai terlihat dari munculnya bercak bulat berwarna coklat pada daun yang kemudian mengering. Ukuran bercak dapat mencapai sekitar 1 inci. Pusat bercak berwarna pucat hingga putih dengan warna tepi lebih gelap. Bercak yang tua dapat menyebabkan lubang-lubang pada daun.
+            Tanaman cabai yang sehat memiliki daun yang hijau cerah, tegak, dan bebas dari bercak atau kerusakan. Tanaman tumbuh subur dengan batang yang kuat dan akar yang berkembang baik. Tidak ada tanda-tanda penyakit atau hama pada daun atau buah cabai.
             
-            Serangan berat dapat menyebabkan daun layu dan rontok, sehingga tanaman cabai kehilangan hampir semua daunnya. Hal ini sangat memengaruhi kemampuan tanaman untuk menghasilkan buah. Penyakit ini lebih sering menyerang tanaman tua dan berkembang pesat di lingkungan yang lembab atau selalu hujan.
-            
-            Pada musim kemarau atau di lahan dengan drainase baik, perkembangan penyakit bercak daun biasanya lebih terhambat.
+            Tanaman juga menunjukkan pertumbuhan yang konsisten, dengan daun yang tidak layu, tidak menguning, dan tidak terhambat oleh kondisi cuaca atau lingkungan.
         """.trimIndent(),
                 control = """
-            1. Lakukan sanitasi dengan cara memusnahkan sisa-sisa tanaman yang terinfeksi.
-            2. Gunakan bibit bebas patogen pada lahan yang tidak terkontaminasi, baik di persemaian maupun di lapangan.
-            3. Perlakukan benih sebelum tanam untuk mencegah infeksi awal.
-            4. Perbaiki drainase lahan agar tidak mudah tergenang.
-            5. Pilih waktu tanam yang tepat, seperti musim kemarau dengan irigasi yang baik. Gunakan pergiliran tanaman dengan jenis non-solanaceae.
-            6. Kendalikan penyakit secara kimiawi menggunakan fungisida yang bijaksana, efektif, dan terdaftar. Aplikasikan sesuai pedoman, berdasarkan ramalan cuaca dan populasi spora di lapangan.
+            1. Pastikan tanaman mendapatkan cukup air dan sinar matahari untuk pertumbuhannya.
+            2. Gunakan pupuk yang seimbang dan sesuai dengan kebutuhan tanaman cabai.
+            3. Prune atau potong daun yang sudah tua atau rusak untuk mendorong pertumbuhan baru.
+            4. Lakukan pemeliharaan berkala seperti pengecekan terhadap potensi serangan hama atau penyakit.
+            5. Jaga kebersihan lingkungan sekitar tanaman dan lakukan rotasi tanaman untuk menghindari penurunan kualitas tanah.
+        """.trimIndent()
+            ),
+            Disease(
+                name = "Thrips & Tungau",
+                symptoms = """
+            Hama ini menyerang tanaman dengan menghisap cairan permukaan bawah daun (terutama daun-daun muda). Serangan ditandai dengan adanya bercak keperak-perakkan. Daun yang terserang berubah warna menjadi coklat tembaga, mengeriting atau keriput dan akhirnya mati. Pada serangan berat menyebabkan daun, tunas atau pucuk menggulung ke dalam dan muncul benjolan seperti tumor, pertumbuhan tanaman terhambat dan kerdil bahkan pucuk tanaman menjadi mati. Hama ini merupakan vektor penyakit virus mosaik dan virus keriting. 
+            Pada musim kemarau perkembangan hama sangat cepat, sehingga populasi lebih tinggi sedangkan pada musim penghujan populasinya akan berkurang karena banyak thrips yang mati akibat tercuci oleh air hujan. Hama ini bersifat polifag dengan tanaman inang utama cabai, bawang merah, bawang daun, jenis bawang lainnya dan tomat, sedangkan tanaman inang lainnya tembakau, kopi, ubi jalar, waluh, bayam, kentang, kapas, tanaman dari famili Crusiferae, Crotalaria dan kacang-kacangan.
+        """.trimIndent(),
+                control = """
+            1. Menggunakan tanaman perangkap seperti kenikir kuning.
+            2. Menggunakan mulsa perak.
+            3. Sanitasi lingkungan dan pemotongan bagian tanaman yang terserang thrips.
+            4. Penggunaan perangkap warna kuning sebanyak 40 buah per ha atau 2 buah per 500 m2 yang dipasang sejak tanaman berumur 2 minggu. Perangkap dapat dibuat dari potongan bambu yang dipasang plastik map warna kuning. Plastik diolesi dengan lem agar thrips yang tertarik menempel. Apabila plastik sudah penuh dengan thrips maka plastik perlu diganti.
+            5. Pemanfaatan musuh alami yang potensial untuk mengendalikan hama thrips, antara lain predator kumbang Coccinellidae, tungau, predator larva Chrysopidae, kepik Entomophthora sp. Anthocoridae dan patogen.
+            6. Pestisida digunakan apabila populasi hama atau kerusakan tanaman telah mencapai ambang pengendalian (serangan mencapai lebih atau sama dengan 15% per tanaman contoh) atau cara-cara pengendalian lainnya tidak dapat menekan populasi hama.
+        """.trimIndent()
+            ),
+            Disease(
+                name = "Bercak Daun",
+                symptoms = """
+            Penyakit ini menimbulkan kerusakan pada daun, batang dan akar. Gejala serangan penyakit ini mulai terlihat dari munculnya bercak bulat berwarna coklat pada daun dan kering, ukuran bercak bisa mencapai sekitar 1 inci. Pusat bercak berwarna pucat sampai putih dengan warna tepi lebih tua. Bercak yang tua dapat menyebabkan lubang-lubang. Bercak daun mampu menimbulkan kerugian ekonomi yang besar pada budidaya cabai, daun yang terserang akan layu dan rontok. Penyakit bercak daun ini dapat menyerang tanaman muda di persemaian, dan cenderung lebih banyak menyerang tanaman tua. Serangan berat menyebabkan tanaman cabai kehilangan hampir semua daunnya, kondisi ini akan mempengaruhi kemampuan cabai dalam menghasilkan buah. 
+            Kondisi lingkungan yang selalu hujan mendukung perkembangan dan penyebaran penyakit bercak daun. Pada musim kemarau dan pada lahan yang mempunyai drainase baik, penyakit layu kurang berkembang.
+        """.trimIndent(),
+                control = """
+            1. Sanitasi dengan cara memusnahkan dan atau sisa-sisa tanaman yang terinfeksi/terserang.
+            2. Menanam bibit yang bebas patogen pada lahan yang tidak terkontaminasi oleh patogen, baik di persemaian maupun di lapangan.
+            3. Perlakuan benih sebelum tanam.
+            4. Perbaikan drainase.
+            5. Waktu tanam yang tepat adalah musim kemarau dengan irigasi yang baik dan pergiliran tanaman dengan tanaman non solanaceae.
+            6. Pengendalian kimia dapat dilakukan dengan fungisida secara bijaksana, efektif, terdaftar dan diijinkan oleh Menteri Pertanian, berpedoman pada peramalan cuaca dan populasi spora di lapangan.
+        """.trimIndent()
+            ),
+            Disease(
+                name = "Busuk Buah Antraknosa",
+                symptoms = """
+            Gejala awal penyakit ini ditandai dengan munculnya bercak yang agak mengkilap, sedikit terbenam dan berair, berwarna hitam, orange dan coklat. Warna hitam merupakan struktur dari cendawan (mikro skelerotia dan aservulus), apabila kondisi lingkungan lembab tubuh buah akan berwarna orange atau merah muda. Luka yang ditimbulkan akan semakin melebar dan membentuk sebuah lingkaran konsentris dengan ukuran diameter sekitar 30 mm atau lebih. Dalam waktu yang tidak lama buah akan berubah menjadi coklat kehitaman dan membusuk, ledakan penyakit ini sangat cepat pada musim hujan. Serangan yang berat menyebabkan seluruh buah keriput dan mengering. Warna kulit buah seperti jerami padi. Penyakit ini menyerang bagian buah cabai, baik buah yang masih muda maupun yang sudah masak. Cendawan ini termasuk salah satu patogen yang terbawa oleh benih. Penyebaran penyakit ini terjadi melalui percikan air, baik air hujan maupun alat semprot. Suhu optimum bagi perkembangan cendawan ini berkisar antara 20–24° C.
+        """.trimIndent(),
+                control = """
+            1. Pencegahan dapat dilakukan dengan membersihkan lahan dan tanaman yang terserang agar tidak menyebar.
+            2. Seleksi benih atau menggunakan benih cabai yang tahan terhadap penyakit ini perlu dilakukan mengingat penyakit ini termasuk patogen tular benih.
+            3. Kultur teknis dengan pergiliran tanaman, penggunaan benih sehat dan sanitasi dengan memotong dan memusnahkan buah yang sakit.
+            4. Penggunaan fungisida sesuai anjuran sebagai alternatif terakhir. Hindari penggunaan alat semprot, atau lakukan sanitasi terlebih dahulu sebelum menggunakan alat semprot.
+        """.trimIndent()
+            ),
+            Disease(
+                name = "Kutu Daun",
+                symptoms = """
+            Serangan berat biasanya terjadi pada musim kemarau. Bagian tanaman yang diserang oleh nimfa dan imago biasanya pucuk tanaman dan daun muda. Daun yang diserang akan mengkerut, mengeriting dan melingkar, menyebabkan pertumbuhan tanaman terhambat dan tanaman menjadi kerdil. Hama ini juga mengeluarkan cairan manis seperti madu, yang biasanya disebut dengan embun madu. Embun madu menarik datangnya semut dan cendawan jelaga. Adanya cendawan pada buah dapat menurunkan kualitas buah. Aphid juga dapat berperan sebagai vektor virus (50 jenis virus) seperti, Papaya Ringspot Virus, Watermelon Mosaic Virus, Cucumber MosaicVirus (CMV). Penyebaran hama ini sangat luas, meliputi daerah beriklim tropis dan sedang kecuali Canada bagian utara dan Asia bagian utara. Kisaran inang dari hama ini cukup luas, seperti tanaman dari family Fabaceaae (Legumes, Lucerne), Solanaceae, Cucurbitaceae dan asteraceae. Kutu daun menyebabkan kerusakan yang cukup serius pada beberapa tanaman sayuran, seperti asparagus, cabai, terong dan okra. Selain tanaman sayuran, kutu daun juga menyebabkan kerusakan yang cukup parah pada jeruk, kapas dan melon.
+        """.trimIndent(),
+                control = """
+            1. Hindari menanam cabai secara berurutan di lokasi yang sama. Lakukan rotasi tanaman dan kosongkan area penanaman selama sekitar satu bulan untuk memutus siklus hidup kutu daun.
+            2. Menjaga kebersihan kebun sangat penting. Singkirkan sisa-sisa tanaman dan gulma yang dapat menjadi tempat persembunyian bagi kutu daun.
+            3. Menggunakan mulsa perak dapat membantu menekan perkembangan kutu daun dengan mengurangi kelembapan yang disukai oleh hama ini.
+            4. Tanam tanaman pendamping seperti catnip, yang dapat menolak kutu daun. Sementara itu, tanaman seperti mustard dan nasturtium dapat berfungsi sebagai perangkap untuk menarik kutu jauh dari tanaman cabai.
+            5. Semprotkan minyak hortikultura yang tidak aktif untuk membunuh telur kutu daun yang mungkin bertahan di musim dingin.
+        """.trimIndent()
+            ),
+            Disease(
+                name = "Virus Kuning",
+                symptoms = """
+            Helai daun mengalami vein clearing dimulai dari daun pucuk berkembang menjadi warna kuning jelas, tulang daun menebal dan daun menggulung ke atas. Infeksi lanjut dari gemini virus menyebabkan daun mengecil dan berwarna kuning terang, tanaman kerdil dan tidak berbuah. Keberadaan penyakit ini sangat merugikan karena mampu mempengaruhi produksi buah. Selain cabai virus ini juga mampu menyerang tanaman tomat, buncis, gula bit, babadotan, atau tanaman pertanian yang lain. Penyakit ini disebabkan oleh virus gemini dengan diameter partikel isometri berukuran 18–22 nm. Virus gemini mempunyai genome sirkular DNA tunggal. Virus dapat ditularkan melalui penyambungan dan melalui vektor Bemisia tabaci.
+        """.trimIndent(),
+                control = """
+            1. Kendalikan serangga vektor virus kuning yaitu kutu kebul (Bemisia tabaci) dengan menggunakan musuh alami predator seperti Menochilus sexmaculatus atau jamur patogen serangga seperti Beauveria bassiana atau Verticillium lecani.
+            2. Penanaman varietas tahan seperti hotchilli.
+            3. Melakukan sanitasi lingkungan terutama tanaman inang seperti ciplukan, terong, gulma bunga kancing.
+            4. Pemupukan tambahan untuk meningkatkan daya tahan tanaman sehingga tanaman tetap berproduksi walaupun terserang virus kuning.
+            5. Kultur teknik yang meliputi: perendaman benih, penggunaan mulsa plastik (untuk menekan gulma inang, populasi vektor, menunda perkembangan virus).
+            6. Penanaman tanaman pembatas seperti jagung dan tagetes.
         """.trimIndent()
             )
         )

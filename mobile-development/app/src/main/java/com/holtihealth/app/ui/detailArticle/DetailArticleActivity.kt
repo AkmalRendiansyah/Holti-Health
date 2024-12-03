@@ -3,6 +3,7 @@ package com.holtihealth.app.ui.detailArticle
 import android.os.Bundle
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -11,13 +12,27 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.holtihealth.app.MyApplication
 import com.holtihealth.app.R
+import com.holtihealth.app.ViewModelFactory
 import com.holtihealth.app.database.Article
 import com.holtihealth.app.database.ArticleRepository
 import com.holtihealth.app.databinding.ActivityDetailArticleBinding
+import com.holtihealth.app.ui.scan.ResultViewModel
 
 class DetailArticleActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailArticleBinding
-    private lateinit var detailArticleViewModel: DetailArticleViewModel
+
+    private val myApplication by lazy {
+        application as? MyApplication ?: throw IllegalStateException("Application is not an instance of MyApplication")
+    }
+
+    private val detailArticleViewModel: DetailArticleViewModel by lazy {
+        val articleId = intent.getIntExtra("ARTICLE_ID", 0)
+        ViewModelProvider(
+            this,
+            ViewModelFactory(articleRepository = myApplication.articleRepository, articleId = articleId)
+        )[DetailArticleViewModel::class.java]
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -28,19 +43,6 @@ class DetailArticleActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        val articleId = intent.getIntExtra("ARTICLE_ID", 0)
-        val repository = (application as MyApplication).articelRepository
-        detailArticleViewModel = ViewModelProvider(this, object : ViewModelProvider.NewInstanceFactory() {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                if (modelClass.isAssignableFrom(DetailArticleViewModel::class.java)) {
-                    @Suppress("UNCHECKED_CAST")
-                    return DetailArticleViewModel(repository, articleId) as T
-                }
-                throw IllegalArgumentException("Unknown ViewModel class")
-            }
-        })[DetailArticleViewModel::class.java]
-
 
         detailArticleViewModel.getdetail.observe(this) { article ->
             article?.let { displayStoryDetails(it) }
