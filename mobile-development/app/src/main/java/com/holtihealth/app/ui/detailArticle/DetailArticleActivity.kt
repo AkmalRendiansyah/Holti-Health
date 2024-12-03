@@ -36,13 +36,10 @@ class DetailArticleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         binding = ActivityDetailArticleBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        supportActionBar?.hide()
 
         detailArticleViewModel.getdetail.observe(this) { article ->
             article?.let { displayStoryDetails(it) }
@@ -50,11 +47,11 @@ class DetailArticleActivity : AppCompatActivity() {
 
     }
     private fun displayStoryDetails(article: Article) {
-        binding.controlText.text = article.solusion
+   //     binding.controlText.text = article.solusion
         binding.descriptionText.text = article.description
         binding.name.text = article.title
-        binding.gejalaText.text = article.symptoms
-        binding.penyebabText.text = article.cause
+  //      binding.gejalaText.text = article.symptoms
+ //       binding.penyebabText.text = article.cause
 
 
         Glide.with(this)
