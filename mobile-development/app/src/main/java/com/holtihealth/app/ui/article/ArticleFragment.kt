@@ -7,25 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.holtihealth.app.databinding.FragmentArticleBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.holtihealth.app.MyApplication
 import com.holtihealth.app.ViewModelFactory
-
+import com.holtihealth.app.databinding.FragmentArticleBinding
 import com.holtihealth.app.ui.detailArticle.DetailArticleActivity
-
 
 class ArticleFragment : Fragment() {
 
-
     private val articleViewModel: ArticleViewModel by viewModels {
-        ViewModelFactory(articleRepository = (requireActivity().application as MyApplication).articelRepository)
+        ViewModelFactory(articleRepository = (requireActivity().application as MyApplication).articleRepository)
     }
 
     private var _binding: FragmentArticleBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var articleAdapter: ArticleAdapter // Assuming ArticleAdapter exists
+    private lateinit var articleAdapter: ArticleAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,10 +35,9 @@ class ArticleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        articleAdapter = ArticleAdapter{ event ->
+        articleAdapter = ArticleAdapter { article ->
             val intent = Intent(context, DetailArticleActivity::class.java)
-            intent.putExtra("ARTICLE_ID", event.id)
+            intent.putExtra("ARTICLE_ID", article.id)
             startActivity(intent)
         }
 
@@ -52,7 +48,7 @@ class ArticleFragment : Fragment() {
 
         // Observe LiveData from ViewModel
         articleViewModel.getAllArticles().observe(viewLifecycleOwner) { articles ->
-            articles?.let { articleAdapter.setArticles(it) }
+            articleAdapter.submitList(articles)
         }
     }
 
