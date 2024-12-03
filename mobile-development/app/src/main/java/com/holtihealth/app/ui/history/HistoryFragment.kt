@@ -1,31 +1,64 @@
 package com.holtihealth.app.ui.history
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.holtihealth.app.R
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.holtihealth.app.MyApplication
+import com.holtihealth.app.ViewModelFactory
+import com.holtihealth.app.databinding.FragmentHistoryBinding
 
 class HistoryFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = HistoryFragment()
+    private var _binding: FragmentHistoryBinding? = null
+    private val binding get() = _binding!!
+
+    private val historyViewModel: HistoryViewModel by viewModels {
+        ViewModelFactory(historyRepository = (requireActivity().application as MyApplication).historyRepository)
     }
 
-    private val viewModel: HistoryViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // TODO: Use the ViewModel
-    }
+    private lateinit var historyAdapter: HistoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_history, container, false)
+        _binding = FragmentHistoryBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Initialize adapter
+        historyAdapter = HistoryAdapter()
+
+        // Setup RecyclerView
+        binding.rvHistory.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = historyAdapter
+        }
+
+        // Observe LiveData
+        historyViewModel.allHistoryWithDisease.observe(viewLifecycleOwner) { historyList ->
+            if (historyList.isNullOrEmpty()) {
+                // Show "No history" message
+                binding.tvNoHistory.visibility = View.VISIBLE
+                binding.rvHistory.visibility = View.GONE
+            } else {
+                // Hide "No history" message and show list
+                binding.tvNoHistory.visibility = View.GONE
+                binding.rvHistory.visibility = View.VISIBLE
+                historyAdapter.submitList(historyList)
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

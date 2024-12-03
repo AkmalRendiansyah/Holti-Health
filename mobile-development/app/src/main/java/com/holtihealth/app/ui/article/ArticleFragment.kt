@@ -11,7 +11,9 @@ import com.holtihealth.app.databinding.FragmentArticleBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.holtihealth.app.MyApplication
 import com.holtihealth.app.ViewModelFactory
+
 import com.holtihealth.app.ui.detailArticle.DetailArticleActivity
+
 
 class ArticleFragment : Fragment() {
 
@@ -36,12 +38,13 @@ class ArticleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set up RecyclerView
+
         articleAdapter = ArticleAdapter{ event ->
             val intent = Intent(context, DetailArticleActivity::class.java)
             intent.putExtra("ARTICLE_ID", event.id)
             startActivity(intent)
         }
+
         binding.rvArticle.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = articleAdapter
