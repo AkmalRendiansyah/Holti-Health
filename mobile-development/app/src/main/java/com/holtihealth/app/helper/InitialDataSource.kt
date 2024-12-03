@@ -243,6 +243,7 @@ object InitialDataSource {
 
             Dengan perhatian yang tepat, petani dapat mengatasi penyakit ini dan meningkatkan keberlanjutan budidaya cabai. 
         """.trimIndent()
+
             ),
             Article(
                 title = "Penyakit Busuk Buah Antraknosa ",
@@ -646,6 +647,7 @@ object InitialDataSource {
             
             * Menggunakan lampu perangkap di lahan dapat membantu mengurangi populasi ngengat dewasa, sehingga siklus ulat tanah dapat diputus
         """.trimIndent()
+
             )
         )
     }
