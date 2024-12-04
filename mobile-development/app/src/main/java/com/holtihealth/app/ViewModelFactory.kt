@@ -9,6 +9,7 @@ import com.holtihealth.app.ui.article.ArticleViewModel
 import com.holtihealth.app.ui.detailArticle.DetailArticleViewModel
 import com.holtihealth.app.ui.detailHistory.DetailHistoryViewModel
 import com.holtihealth.app.ui.history.HistoryViewModel
+import com.holtihealth.app.ui.home.HomeViewModel
 import com.holtihealth.app.ui.scan.ResultViewModel
 
 class ViewModelFactory(
@@ -35,6 +36,9 @@ class ViewModelFactory(
         } else if (modelClass.isAssignableFrom(DetailHistoryViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return  DetailHistoryViewModel(historyRepository!!, historyId!!) as T
+        } else if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return HomeViewModel(articleRepository!!, historyRepository!!) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

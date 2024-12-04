@@ -59,6 +59,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.fab.setOnClickListener { startCameraX()}
 
+        if (savedInstanceState == null) {
+            openFragment(HomeFragment()) // This will show ArticleFragment first
+        }
+
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
@@ -100,7 +104,7 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragmentContainerView, fragment)
             .commit()
     }
-
+    
     private fun startCameraX() {
         val intent = Intent(this, CameraActivity::class.java)
         startActivity(intent)
