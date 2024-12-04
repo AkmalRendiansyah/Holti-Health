@@ -8,6 +8,8 @@ import android.os.Environment
 import android.provider.MediaStore
 import androidx.core.content.FileProvider
 import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -21,6 +23,25 @@ fun getImageUri(context: Context): Uri {
     } else {
         getImageUriForPreQ(context)
     }
+}
+
+fun saveImageToInternalStorage(context: Context, uri: Uri, fileName: String): String? {
+    return try {
+        val inputStream: InputStream? = context.contentResolver.openInputStream(uri)
+        val file = File(context.filesDir, fileName)
+        FileOutputStream(file).use { outputStream ->
+            inputStream?.copyTo(outputStream)
+        }
+        file.absolutePath
+    } catch (e: Exception) {
+        e.printStackTrace()
+        null
+    }
+}
+
+fun formatToIndonesianTime(timestamp: Long): String{
+    val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale("id", "ID"))
+    return dateFormat.format(timestamp)
 }
 
 private fun getImageUriForQAndAbove(context: Context): Uri {

@@ -9,17 +9,19 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
 import com.holtihealth.app.databinding.ActivityMainBinding
 import com.holtihealth.app.ui.article.ArticleFragment
 import com.holtihealth.app.ui.history.HistoryFragment
 import com.holtihealth.app.ui.home.HomeFragment
+import com.holtihealth.app.ui.login.LoginActivity
 import com.holtihealth.app.ui.profile.ProfileFragment
 import com.holtihealth.app.ui.scan.CameraActivity
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
+    private lateinit var firebaseAuth: FirebaseAuth
     private val requestPermissionLauncher =
         registerForActivityResult(
             ActivityResultContracts.RequestPermission()
@@ -40,6 +42,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        // Cek apakah pengguna sudah login
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser == null) {
+            redirectToLogin()
+            return
+        }
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -77,6 +87,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    }
+    private fun redirectToLogin() {
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish()
     }
 
     private fun openFragment(fragment: Fragment) {

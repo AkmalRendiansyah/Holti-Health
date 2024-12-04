@@ -83,9 +83,7 @@ class ImageClassifierHelper(
 
         val classNames = listOf(
             "Bercak Daun", "Busuk Buah Antraknosa", "Kutu Daun",
-            "Kutu Daun Persik", "Kutu Kebul", "Lalat Buah",
-            "Layu", "Sehat", "Thrips & Tungau",
-            "Ulat Grayak", "Virus Kuning"
+            "Sehat", "Thrips & Tungau","Virus Kuning"
         )
 
         val predictedIndex = probabilities.indices.maxByOrNull { probabilities[it] } ?: -1

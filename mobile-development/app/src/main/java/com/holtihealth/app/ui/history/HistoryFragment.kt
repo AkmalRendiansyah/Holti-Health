@@ -1,5 +1,6 @@
 package com.holtihealth.app.ui.history
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.holtihealth.app.MyApplication
 import com.holtihealth.app.ViewModelFactory
 import com.holtihealth.app.databinding.FragmentHistoryBinding
+import com.holtihealth.app.ui.detailHistory.DetailHistoryActivity
 
 class HistoryFragment : Fragment() {
 
@@ -33,10 +35,13 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize adapter
-        historyAdapter = HistoryAdapter()
+        historyAdapter = HistoryAdapter { historyWithDisease ->
+            val intent = Intent(context, DetailHistoryActivity::class.java)
+            intent.putExtra("HISTORY_ID", historyWithDisease.history.id)
+            startActivity(intent)
+        }
 
-        // Setup RecyclerView
+
         binding.rvHistory.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = historyAdapter

@@ -11,7 +11,7 @@ import kotlinx.coroutines.SupervisorJob
 class MyApplication : Application() {
     private val applicationScope = CoroutineScope(SupervisorJob())
     val database by lazy { HoltiDatabase.getDatabase(this, applicationScope) }
-    val articelRepository by lazy { ArticleRepository(database.articleDao())}
+    val articleRepository by lazy { ArticleRepository(database.articleDao())}
     val diseaseRepository by lazy { DiseaseRepository(database.diseaseDao())}
     val historyRepository by lazy {HistoryRepository(database.historyDao())}
 

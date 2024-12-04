@@ -10,6 +10,5 @@ class DetailArticleViewModel (private val repository: ArticleRepository, article
 
     val getdetail: LiveData<Article> = repository.getArticleDetail(articleId)
 
-
 }
 
