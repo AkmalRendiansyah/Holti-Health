@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -55,6 +56,7 @@ dependencies {
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.activity)
     implementation(libs.tensorflow.lite.metadata)
+    implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -75,6 +77,6 @@ dependencies {
     implementation("org.tensorflow:tensorflow-lite-task-vision-play-services:0.4.2")
     implementation("com.google.android.gms:play-services-tflite-gpu:16.2.0")
     implementation("org.tensorflow:tensorflow-lite-gpu:2.11.0")
-
+    implementation("com.google.firebase:firebase-auth-ktx:23.1.0")
 
 }

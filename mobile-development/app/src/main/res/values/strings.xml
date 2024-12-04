@@ -9,7 +9,7 @@
     <string name="Scan">Scan</string>
     <string name="scan">Scan</string>
     <string name="signup">Daftar</string>
-    <string name="login">Masuk</string>
+    <string name="masuk">Masuk</string>
     <string name="title_welcome_page">Selamat datang di Holti Health!</string>
     <string name="message_welcome_page">Temukan solusi terbaik untuk melindungi tanaman cabai Anda dari penyakit. Dengan Holti Health, panen sehat bukan lagi sekadar harapan!</string>
     <string name="title_welcome_page1">Selamat Datang, Petani Cerdas!</string>
@@ -25,6 +25,13 @@
     <string name="scan_date">scan date</string>
 
     <string name="title">Title</string>
+    <string name="register">Register</string>
+    <string name="email">email</string>
+    <string name="silahkan_login_terlebih_dahulu_ya">Silahkan Login Terlebih dahulu ya</string>
+    <string name="sudah_siap_untuk_hasil_panen_berlimpah">Sudah Siap Untuk Hasil Panen Berlimpah?</string>
+    <string name="password">password</string>
+    <string name="title_register">Lengkapi Data Dirimu Dibawah Ini ya</string>
+    <string name="nama">Nama</string>
 
 
 </resources>
