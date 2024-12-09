@@ -56,8 +56,8 @@ class RegisterActivity : AppCompatActivity() {
             binding.emailEditTextLayout.error = null
         }
 
-        if (password.isEmpty() || password.length < 6) {
-            binding.passwordEditTextLayout.error = "Password minimal 6 karakter"
+        if (password.isEmpty() || password.length < 8) {
+            binding.passwordEditTextLayout.error = "Password minimal 8 karakter"
             return false
         } else {
             binding.passwordEditTextLayout.error = null
