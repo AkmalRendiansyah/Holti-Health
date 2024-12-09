@@ -30,13 +30,20 @@
     <string name="recent_diagnoze">Recent Diagnoze</string>
     <string name="belum_ada_history">Belum Ada History</string>
 
-    <string name="email">email</string>
+    <string name="email">Email</string>
     <string name="silahkan_login_terlebih_dahulu_ya">Silahkan Login Terlebih dahulu ya</string>
     <string name="sudah_siap_untuk_hasil_panen_berlimpah">Sudah Siap Untuk Hasil Panen Berlimpah?</string>
-    <string name="password">password</string>
+    <string name="password">Password</string>
     <string name="title_register">Lengkapi Data Dirimu Dibawah Ini ya</string>
     <string name="nama">Nama</string>
     <string name="home">Home</string>
+    <string name="hello">Apa Kabar!</string>
+    <string name="username">username</string>
+    <string name="kenali_penyakit_cabai_dengan_ai">Kenali penyakit cabai dengan AI</string>
+    <string name="mulai_kenali">Mari mulai kenali penyakit yang menyerang cabai anda.</string>
+    <string name="scan_now">Scan Sekarang</string>
+    <string name="login">Login</string>
+    <string name="invalid_email_error">Format email tidak sesuai</string>
 
 
 </resources>

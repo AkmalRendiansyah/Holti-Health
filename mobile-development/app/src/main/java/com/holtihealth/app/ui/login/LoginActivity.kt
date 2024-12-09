@@ -2,6 +2,7 @@ package com.holtihealth.app.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -40,6 +41,13 @@ class LoginActivity : AppCompatActivity() {
     private fun validateInputs(email: String, password: String): Boolean {
         if (email.isEmpty()) {
             binding.emailEditTextLayout.error = "Email tidak boleh kosong"
+            return false
+        } else {
+            binding.emailEditTextLayout.error = null
+        }
+
+        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.emailEditTextLayout.error = "Email tidak valid"
             return false
         } else {
             binding.emailEditTextLayout.error = null

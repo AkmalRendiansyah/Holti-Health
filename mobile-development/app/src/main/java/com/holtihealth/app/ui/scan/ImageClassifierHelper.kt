@@ -7,7 +7,7 @@ import android.net.Uri
 import android.util.Log
 import com.google.android.gms.tflite.client.TfLiteInitializationOptions
 import com.google.android.gms.tflite.gpu.support.TfLiteGpu
-import com.holtihealth.app.ml.ChiliDiseaseDetection
+import com.holtihealth.app.ml.ChiliDiseaseDetectionv22
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import org.tensorflow.lite.task.gms.vision.TfLiteVision
@@ -18,7 +18,7 @@ class ImageClassifierHelper(
     private val context: Context,
     private val classifierListener: ClassifierListener,
 ) {
-    private lateinit var model: ChiliDiseaseDetection
+    private lateinit var model: ChiliDiseaseDetectionv22
     private var isGPUSupported: Boolean = false
     private var isModelReady: Boolean = false
 
@@ -44,7 +44,7 @@ class ImageClassifierHelper(
 
     private fun setupModel() {
         try {
-            model = ChiliDiseaseDetection.newInstance(context)
+            model = ChiliDiseaseDetectionv22.newInstance(context)
             isModelReady = true
             Log.d(TAG, "Model berhasil diinisialisasi.")
         } catch (e: Exception) {
