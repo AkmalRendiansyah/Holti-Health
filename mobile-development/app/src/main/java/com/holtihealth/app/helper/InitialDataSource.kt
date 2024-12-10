@@ -7,37 +7,37 @@ object InitialDataSource {
     fun getArticles(): List<Article> {
         return listOf(
             Article(
-                title = "Penyakit Antraknos pada Cabai",
+                title = "Penyakit Antraknosa pada Cabai",
                 image = "https://www.infarm.co.id/uploads/article/Xgg0sUuJn8IqiQHSGgWonRojj31w7moyiXdSVLOa.jpg",
                 description = """
-             Penyakit antraknos adalah salah satu penyakit yang paling merugikan pada tanaman cabai. Penyakit ini disebabkan oleh jamur dari genus Colletotrichum, yang dapat menyerang berbagai bagian tanaman, seperti buah, daun, dan batang. Antraknos dikenal karena kerusakannya yang signifikan, terutama pada buah cabai yang siap panen, sehingga dapat menyebabkan kerugian ekonomi yang besar bagi petani.
+            Penyakit antraknos adalah salah satu penyakit yang paling merugikan pada tanaman cabai. Penyakit ini disebabkan oleh jamur dari genus Colletotrichum, yang dapat menyerang berbagai bagian tanaman, seperti buah, daun, dan batang. Antraknos dikenal karena kerusakannya yang signifikan, terutama pada buah cabai yang siap panen, sehingga dapat menyebabkan kerugian ekonomi yang besar bagi petani.
              
-             Penyebab dan Penyebaran
+            Penyebab dan Penyebaran
              
-             Penyakit antraknos disebabkan oleh beberapa spesies jamur Colletotrichum, seperti Colletotrichum capsici dan Colletotrichum gloeosporioides. 
+            Penyakit antraknos disebabkan oleh beberapa spesies jamur Colletotrichum, seperti Colletotrichum capsici dan Colletotrichum gloeosporioides. 
             
-             Jamur ini menyebar melalui:
+            Jamur ini menyebar melalui:
              
-             * Air hujan: Percikan air yang membawa spora jamur ke bagian tanaman yang sehat.
-             * Angin: Spora jamur dapat terbawa angin dan menginfeksi tanaman di sekitarnya.
-             * Alat pertanian: Alat yang terkontaminasi dapat menjadi media penyebaran.
-             * Buah atau tanaman terinfeksi: Buah yang terinfeksi bisa menjadi sumber spora jamur.
-             * Jamur ini cenderung berkembang biak di lingkungan yang lembap dan suhu hangat (23–30°C), kondisi yang sering ditemui di daerah tropis seperti Indonesia.
+            * Air hujan: Percikan air yang membawa spora jamur ke bagian tanaman yang sehat.
+            * Angin: Spora jamur dapat terbawa angin dan menginfeksi tanaman di sekitarnya.
+            * Alat pertanian: Alat yang terkontaminasi dapat menjadi media penyebaran.
+            * Buah atau tanaman terinfeksi: Buah yang terinfeksi bisa menjadi sumber spora jamur.
+            * Jamur ini cenderung berkembang biak di lingkungan yang lembap dan suhu hangat (23–30°C), kondisi yang sering ditemui di daerah tropis seperti Indonesia.
              
-             Gejala Antraknos
+            Gejala Antraknos
              
-             Gejala antraknos pada cabai meliputi:
+            Gejala antraknos pada cabai meliputi:
              
-             1.Buah Cabai:
+            1.Buah Cabai:
              
-             * Muncul bercak-bercak cekung berwarna coklat tua hingga hitam.
-             * Bercak tersebut sering kali berbentuk melingkar dengan konsentrasi spora jamur di tengahnya, yang tampak seperti lingkaran kecil-kecil.
-             * Buah yang terinfeksi parah akan membusuk dan akhirnya rontok.
+            * Muncul bercak-bercak cekung berwarna coklat tua hingga hitam.
+            * Bercak tersebut sering kali berbentuk melingkar dengan konsentrasi spora jamur di tengahnya, yang tampak seperti lingkaran kecil-kecil.
+            * Buah yang terinfeksi parah akan membusuk dan akhirnya rontok.
             
-             2.Batang dan Daun:
+            2.Batang dan Daun:
              
-             * Bercak hitam atau coklat dapat muncul pada daun dan batang, meskipun lebih jarang dibandingkan buah.
-             * Bagian yang terinfeksi dapat mengering dan mati.
+            * Bercak hitam atau coklat dapat muncul pada daun dan batang, meskipun lebih jarang dibandingkan buah.
+            * Bagian yang terinfeksi dapat mengering dan mati.
                 
             Dampak Ekonomi
             

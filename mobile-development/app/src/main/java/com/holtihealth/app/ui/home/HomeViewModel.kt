@@ -3,11 +3,14 @@ package com.holtihealth.app.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.holtihealth.app.database.Article
+import com.holtihealth.app.database.ArticleRepository
+import com.holtihealth.app.database.HistoryRepository
+import com.holtihealth.app.database.HistoryWithDisease
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(private val articleRepository: ArticleRepository, private val historyRepository: HistoryRepository) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
+    fun getAllArticles(): LiveData<List<Article>> = articleRepository.getAllArticles()
+
+    fun allHistoryWithDisease() : LiveData<List<HistoryWithDisease>> = historyRepository.getAllHistoryWithDisease()
 }

@@ -1,6 +1,7 @@
 package com.holtihealth.app.ui.scan
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -9,12 +10,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.holtihealth.app.MainActivity
 import com.holtihealth.app.MyApplication
 import com.holtihealth.app.ViewModelFactory
 import com.holtihealth.app.database.History
 import com.holtihealth.app.databinding.ActivityResultBinding
 import com.holtihealth.app.formatToIndonesianTime
 import com.holtihealth.app.saveImageToInternalStorage
+import com.holtihealth.app.ui.history.HistoryFragment
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
@@ -44,6 +47,14 @@ class ResultActivity : AppCompatActivity() {
         val imageUriString = intent.getStringExtra("imageUri")
 
         binding.resultTextView.text = resultText
+        binding.backButton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            startActivity(intent)
+            finish()
+        }
+
 
         if (imageUriString != null) {
             val imageUri = Uri.parse(imageUriString)
