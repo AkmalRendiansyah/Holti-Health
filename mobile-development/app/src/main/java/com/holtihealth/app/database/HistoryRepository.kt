@@ -15,4 +15,8 @@ class HistoryRepository(private val historyDao: HistoryDao) {
     fun getHistoryDetail(historyId: Int): LiveData<HistoryWithDisease> {
         return historyDao.getHistoryById(historyId)
     }
+
+    suspend fun deleteHistory(historyId: Int) {
+        historyDao.deleteHistoryById(historyId)
+    }
 }
