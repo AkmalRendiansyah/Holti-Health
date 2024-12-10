@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,12 +24,14 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var firebaseAuth: FirebaseAuth
-
-    private  val homeViewModel: HomeViewModel by viewModels {
-        ViewModelFactory(articleRepository = (requireActivity().application as MyApplication).articleRepository, historyRepository = (requireActivity().application as MyApplication).historyRepository)
+    private val homeViewModel: HomeViewModel by viewModels {
+        ViewModelFactory(
+            articleRepository = (requireActivity().application as MyApplication).articleRepository,
+            historyRepository = (requireActivity().application as MyApplication).historyRepository
+        )
     }
 
-    private  lateinit var articleItemAdapter: ArticleItemAdapter
+    private lateinit var articleItemAdapter: ArticleItemAdapter
     private lateinit var historyItemAdapter: HistoryItemAdapter
 
     override fun onCreateView(
@@ -44,9 +47,27 @@ class HomeFragment : Fragment() {
 
         setupRecyclerViews()
 
+        // Setup the Toolbar
+        // Setup the Toolbar
+        val toolbar = binding.toolbar
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "Apa Kabar!"
+
+        firebaseAuth = FirebaseAuth.getInstance()
+        val user = firebaseAuth.currentUser
+        if (user != null) {
+            val username = user.displayName ?: "Nama belum diset"
+            binding.toolbarSubtitle.text = username
+        } else {
+            Toast.makeText(requireContext(), "Pengguna tidak ditemukan", Toast.LENGTH_SHORT).show()
+        }
+
+
+        // Set up button click listener
         binding.scanNowButton.setOnClickListener {
             val intent = Intent(context, CameraActivity::class.java)
-            startActivity(intent)}
+            startActivity(intent)
+        }
 
         articleItemAdapter = ArticleItemAdapter { article ->
             val intent = Intent(context, DetailArticleActivity::class.java)
@@ -59,7 +80,6 @@ class HomeFragment : Fragment() {
             adapter = articleItemAdapter
         }
 
-        // Setup History RecyclerView
         historyItemAdapter = HistoryItemAdapter { historyWithDisease ->
             val intent = Intent(context, DetailHistoryActivity::class.java)
             intent.putExtra("HISTORY_ID", historyWithDisease.history.id)
@@ -85,44 +105,11 @@ class HomeFragment : Fragment() {
                 historyItemAdapter.submitList(histories)
             }
         }
-
-        firebaseAuth = FirebaseAuth.getInstance()
-
-        val user = firebaseAuth.currentUser
-        if (user != null) {
-            binding.tvUsername.setText(user.displayName ?: "Nama belum diset")
-        } else {
-            Toast.makeText(requireContext(), "Pengguna tidak ditemukan", Toast.LENGTH_SHORT).show()
-        }
     }
-
 
     private fun setupRecyclerViews() {
-        // Setup Article RecyclerView
-        articleItemAdapter = ArticleItemAdapter { article ->
-            val intent = Intent(context, DetailArticleActivity::class.java)
-            intent.putExtra("ARTICLE_ID", article.id)
-            startActivity(intent)
-        }
-
-        binding.rvArticle.apply {
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            adapter = articleItemAdapter
-        }
-
-        // Setup History RecyclerView
-        historyItemAdapter = HistoryItemAdapter { historyWithDisease ->
-            val intent = Intent(context, DetailHistoryActivity::class.java)
-            intent.putExtra("HISTORY_ID", historyWithDisease.history.id)
-            startActivity(intent)
-        }
-
-        binding.rvHistory.apply {
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            adapter = historyItemAdapter
-        }
+        // Recycler view setup code here (already included above)
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

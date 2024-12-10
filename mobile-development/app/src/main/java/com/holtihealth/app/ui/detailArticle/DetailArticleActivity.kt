@@ -1,6 +1,7 @@
 package com.holtihealth.app.ui.detailArticle
 
 import android.os.Bundle
+import android.text.Html
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -47,12 +48,10 @@ class DetailArticleActivity : AppCompatActivity() {
 
     }
     private fun displayStoryDetails(article: Article) {
-   //     binding.controlText.text = article.solusion
-        binding.descriptionText.text = article.description
-        binding.name.text = article.title
-  //      binding.gejalaText.text = article.symptoms
- //       binding.penyebabText.text = article.cause
 
+        val descriptionText = Html.fromHtml(article.description, Html.FROM_HTML_MODE_COMPACT)
+        binding.descriptionText.text = descriptionText
+        binding.name.text = article.title
 
         Glide.with(this)
             .load(article.image)

@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.holtihealth.app.database.Article
-import com.holtihealth.app.databinding.ItemarticleBinding
+import com.holtihealth.app.databinding.ItemArticleBinding
 
 class ArticleAdapter(private val onArticleClick: (Article) -> Unit) :
     ListAdapter<Article, ArticleAdapter.ArticleViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-        val binding = ItemarticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ArticleViewHolder(binding)
     }
 
@@ -26,7 +26,7 @@ class ArticleAdapter(private val onArticleClick: (Article) -> Unit) :
         }
     }
 
-    class ArticleViewHolder(private val binding: ItemarticleBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ArticleViewHolder(private val binding: ItemArticleBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(article: Article) {
             binding.tvTitle.text = article.title
             binding.tvDescription.text = article.description
