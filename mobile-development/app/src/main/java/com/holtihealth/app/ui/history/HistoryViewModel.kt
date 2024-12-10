@@ -10,9 +10,11 @@ import kotlinx.coroutines.launch
 class HistoryViewModel(private val repository: HistoryRepository) : ViewModel() {
     val allHistoryWithDisease : LiveData<List<HistoryWithDisease>> = repository.getAllHistoryWithDisease()
 
+
     fun deleteHistory(historyId: Int) {
         viewModelScope.launch {
             repository.deleteHistory(historyId)
         }
     }
+
 }

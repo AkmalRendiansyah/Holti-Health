@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.holtihealth.app.R
 import com.holtihealth.app.databinding.FragmentProfileBinding
 import com.holtihealth.app.ui.login.LoginActivity
+import com.holtihealth.app.ui.welcome.WelcomeActivity
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
@@ -57,7 +58,7 @@ class ProfileFragment : Fragment() {
         binding.logoutButton.setOnClickListener {
             firebaseAuth.signOut()
             Toast.makeText(requireContext(), "Berhasil logout", Toast.LENGTH_SHORT).show()
-            val intent = Intent(requireContext(), LoginActivity::class.java)
+            val intent = Intent(requireContext(), WelcomeActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
             requireActivity().finish()
