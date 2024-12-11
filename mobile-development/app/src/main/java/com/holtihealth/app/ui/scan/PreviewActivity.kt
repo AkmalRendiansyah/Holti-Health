@@ -92,11 +92,11 @@ class PreviewActivity : AppCompatActivity(), ImageClassifierHelper.ClassifierLis
         }
     }
 
-    override fun onResults(predictedLabel: String, confidence: Float) {
+    override fun onResults(predictedLabel: String, confidence: String) {
         val imageUri = intent.getStringExtra("imageUri")
         val intent = Intent(this, ResultActivity::class.java)
         intent.putExtra("resultText", predictedLabel)
-        intent.putExtra("confidenceScore", confidence.toString())
+        intent.putExtra("confidenceScore", confidence)
         intent.putExtra("imageUri", imageUri)
         startActivity(intent)
     }
@@ -107,6 +107,5 @@ class PreviewActivity : AppCompatActivity(), ImageClassifierHelper.ClassifierLis
 
     override fun onDestroy() {
         super.onDestroy()
-        imageClassifierHelper?.close()
     }
 }

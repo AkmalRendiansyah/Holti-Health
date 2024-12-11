@@ -99,8 +99,4 @@ class CameraActivity : AppCompatActivity() {
         intent.putExtra("imageUri", uri.toString())
         startActivity(intent)
     }
-
-    companion object {
-        private const val REQUEST_CODE = 1001
-    }
 }

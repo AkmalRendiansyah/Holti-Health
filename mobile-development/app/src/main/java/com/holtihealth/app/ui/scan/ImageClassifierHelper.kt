@@ -5,145 +5,89 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Log
-import com.google.android.gms.tflite.client.TfLiteInitializationOptions
-import com.google.android.gms.tflite.gpu.support.TfLiteGpu
-import com.holtihealth.app.ml.ChiliDiseaseDetectionv22
-import org.tensorflow.lite.DataType
-import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
-import org.tensorflow.lite.task.gms.vision.TfLiteVision
-import java.nio.ByteBuffer
-import java.nio.ByteOrder
+import com.holtihealth.app.reduceFileImage
+import com.holtihealth.app.retrofit.ApiConfig
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
+import java.io.FileOutputStream
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ImageClassifierHelper(
     private val context: Context,
     private val classifierListener: ClassifierListener,
 ) {
-    private lateinit var model: ChiliDiseaseDetectionv22
-    private var isGPUSupported: Boolean = false
-    private var isModelReady: Boolean = false
-
-    init {
-        initializeTfLite()
-    }
-
-    private fun initializeTfLite() {
-        TfLiteGpu.isGpuDelegateAvailable(context).onSuccessTask { gpuAvailable ->
-            val optionsBuilder = TfLiteInitializationOptions.builder()
-            if (gpuAvailable) {
-                isGPUSupported = true
-                optionsBuilder.setEnableGpuDelegateSupport(true)
-            }
-            TfLiteVision.initialize(context, optionsBuilder.build())
-        }.addOnSuccessListener {
-            Log.d(TAG, "TensorFlow Lite Vision berhasil diinisialisasi.")
-            setupModel()
-        }.addOnFailureListener {
-            classifierListener.onError("Error: TensorFlow Lite Vision belum terinisialisasi.")
-        }
-    }
-
-    private fun setupModel() {
-        try {
-            model = ChiliDiseaseDetectionv22.newInstance(context)
-            isModelReady = true
-            Log.d(TAG, "Model berhasil diinisialisasi.")
-        } catch (e: Exception) {
-            classifierListener.onError("Error: Gagal menginisialisasi model. ${e.message}")
-            Log.e(TAG, "setupModel: ${e.message}")
-        }
-    }
 
     fun classifyImage(imageUri: Uri) {
-        if (!isModelReady) {
-            classifierListener.onError("Error: Model belum siap digunakan.")
+        val bitmap = uriToBitmap(imageUri)
+        if (bitmap == null) {
+            classifierListener.onError("Error: Unable to load image.")
             return
         }
 
-        val bitmap = uriToBitmap(imageUri) ?: run {
-            Log.d(TAG, "Processing imageUri: $imageUri")
-            classifierListener.onError("Error: Gambar tidak dapat dimuat.")
+        val imageFile = bitmapToFile(bitmap, "temp_image.jpg")
+        if (imageFile == null) {
+            classifierListener.onError("Error: Unable to process image.")
             return
         }
 
-        // Resize Bitmap to 224x224 (input shape of the model)
-        val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 224, 224, true)
+        val reducedImageFile = imageFile.reduceFileImage()
 
-        // Convert Bitmap to ByteBuffer
-        val byteBuffer = convertBitmapToByteBuffer(resizedBitmap)
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val requestBody = reducedImageFile.asRequestBody("image/jpeg".toMediaTypeOrNull())
+                val multipartBody = MultipartBody.Part.createFormData("file", reducedImageFile.name, requestBody)
 
-        // Prepare TensorBuffer
-        val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)
-        inputFeature0.loadBuffer(byteBuffer)
+                val apiService = ApiConfig.getApiService()
+                val response = apiService.uploadImage(multipartBody)
 
-        // Run inference and get results
-        val outputs = model.process(inputFeature0)
-        val outputFeature0 = outputs.outputFeature0AsTensorBuffer
-        val probabilities = outputFeature0.floatArray
-
-
-        val classNames = listOf(
-            "Bercak Daun", "Busuk Buah Antraknosa", "Kutu Daun",
-            "Sehat", "Thrips & Tungau","Virus Kuning"
-        )
-
-        val predictedIndex = probabilities.indices.maxByOrNull { probabilities[it] } ?: -1
-        val predictedLabel = if (predictedIndex != -1) classNames[predictedIndex] else "Unknown"
-        val confidence = probabilities[predictedIndex]
-
-        Log.d("ImageClassifierHelper", "Classification outputFeature0: $outputFeature0 (Confidence: $confidence) probabilities $probabilities")
-
-
-        classifierListener.onResults(predictedLabel, confidence)
+                withContext(Dispatchers.Main) {
+                    if (response.status == "success") {
+                        classifierListener.onResults(response.prediction ?: "Unknown", response.confidence ?: "")
+                    } else {
+                        classifierListener.onError("Error: ${response.message}")
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Log.e("ImageClassifierHelper", "Parsing error: ${e.message}")
+                    classifierListener.onError("Error: ${e.message}")
+                }
+            }
+        }
     }
 
-    private fun convertBitmapToByteBuffer(bitmap: Bitmap): ByteBuffer {
-        val byteBuffer = ByteBuffer.allocateDirect(4 * 224 * 224 * 3) // 4 bytes per float, 3 channels (RGB)
-        byteBuffer.order(ByteOrder.nativeOrder())
-
-        val intValues = IntArray(224 * 224)
-        bitmap.getPixels(intValues, 0, bitmap.width, 0, 0, bitmap.width, bitmap.height)
-
-        for (pixel in intValues) {
-            val r = ((pixel shr 16) and 0xFF) / 255.0f
-            val g = ((pixel shr 8) and 0xFF) / 255.0f
-            val b = (pixel and 0xFF) / 255.0f
-
-            byteBuffer.putFloat(r)
-            byteBuffer.putFloat(g)
-            byteBuffer.putFloat(b)
+    private fun bitmapToFile(bitmap: Bitmap, fileName: String): File? {
+        return try {
+            val file = File(context.cacheDir, fileName)
+            val outputStream = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            outputStream.flush()
+            outputStream.close()
+            file
+        } catch (e: Exception) {
+            Log.e("ImageClassifierHelper", "bitmapToFile: ${e.message}")
+            null
         }
-
-        return byteBuffer
     }
 
     private fun uriToBitmap(imageUri: Uri): Bitmap? {
         return try {
             context.contentResolver.openInputStream(imageUri).use { inputStream ->
                 BitmapFactory.decodeStream(inputStream)
-            }?.let { bitmap ->
-                val maxSize = 1024
-                val width = bitmap.width
-                val height = bitmap.height
-                val scaleFactor = Math.min(maxSize.toFloat() / width, maxSize.toFloat() / height)
-                Bitmap.createScaledBitmap(bitmap, (width * scaleFactor).toInt(), (height * scaleFactor).toInt(), true)
             }
         } catch (e: Exception) {
-            Log.e(TAG, "uriToBitmap: Gagal memuat gambar. ${e.message}")
+            Log.e("ImageClassifierHelper", "uriToBitmap: Failed to load image. ${e.message}")
             null
         }
     }
 
-
-    fun close() {
-        model.close()
-    }
-
     interface ClassifierListener {
-        fun onResults(predictedLabel: String, confidence: Float)
+        fun onResults(predictedLabel: String, confidence: String)
         fun onError(error: String)
-    }
-
-    companion object {
-        private const val TAG = "ImageClassifierHelper"
     }
 }
