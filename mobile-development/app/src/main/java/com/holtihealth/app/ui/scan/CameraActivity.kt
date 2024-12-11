@@ -105,6 +105,7 @@ class CameraActivity : AppCompatActivity() {
         intent.putExtra("imageUri", uri.toString())
         startActivity(intent)
     }
+
     private fun showSnapTipsDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_snap_tips, null)
         val alertDialog = AlertDialog.Builder(this)
@@ -120,4 +121,5 @@ class CameraActivity : AppCompatActivity() {
 
         alertDialog.show()
     }
+
 }

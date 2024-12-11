@@ -124,6 +124,7 @@ class PreviewActivity : AppCompatActivity(), ImageClassifierHelper.ClassifierLis
 
     override fun onResults(predictedLabel: String, confidence: String) {
         hideProgressDialog()
+
         val imageUri = intent.getStringExtra("imageUri")
         val intent = Intent(this, ResultActivity::class.java)
         intent.putExtra("resultText", predictedLabel)
