@@ -9,7 +9,7 @@ data class Article (
     val id: Int = 0,
     val title: String,
     var description: String,
-    var image: String,
+    var image: Int,
 
 
 )
