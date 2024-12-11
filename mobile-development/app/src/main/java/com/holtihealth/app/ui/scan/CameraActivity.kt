@@ -1,8 +1,10 @@
 package com.holtihealth.app.ui.scan
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -13,6 +15,7 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import com.holtihealth.app.R
 import com.holtihealth.app.createCustomTempFile
 import com.holtihealth.app.databinding.ActivityCameraBinding
 
@@ -38,6 +41,9 @@ class CameraActivity : AppCompatActivity() {
 
         startCamera()
 
+        binding.buttonSnapTips.setOnClickListener {
+            showSnapTipsDialog()
+        }
         binding.buttonOpenGallery.setOnClickListener {
             openGallery()
         }
@@ -99,4 +105,21 @@ class CameraActivity : AppCompatActivity() {
         intent.putExtra("imageUri", uri.toString())
         startActivity(intent)
     }
+
+    private fun showSnapTipsDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_snap_tips, null)
+        val alertDialog = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .setCancelable(true)
+            .create()
+
+
+        val buttonGotIt = dialogView.findViewById<Button>(R.id.dialog_button_got_it)
+        buttonGotIt.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        alertDialog.show()
+    }
+
 }
