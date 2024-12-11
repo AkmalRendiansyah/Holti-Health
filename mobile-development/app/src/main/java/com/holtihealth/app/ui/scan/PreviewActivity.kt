@@ -7,6 +7,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
@@ -125,6 +126,15 @@ class PreviewActivity : AppCompatActivity(), ImageClassifierHelper.ClassifierLis
     override fun onResults(predictedLabel: String, confidence: String) {
         hideProgressDialog()
 
+        val confidenceScore = confidence.replace("%", "").toFloatOrNull() ?: 0f
+        Log.d("PreviewActivity", "Confidence Score: $confidenceScore")
+
+        if (confidenceScore < 90f) { // Bandingkan dengan 50
+            showLowConfidenceDialog()
+            return
+        }
+
+
         val imageUri = intent.getStringExtra("imageUri")
         val intent = Intent(this, ResultActivity::class.java)
         intent.putExtra("resultText", predictedLabel)
@@ -172,6 +182,20 @@ class PreviewActivity : AppCompatActivity(), ImageClassifierHelper.ClassifierLis
 
         val buttonGotIt = dialogView.findViewById<Button>(R.id.dialog_button_got_it)
         buttonGotIt.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        alertDialog.show()
+    }
+    private fun showLowConfidenceDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_low_confidence, null)
+        val alertDialog = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .setCancelable(false)
+            .create()
+
+        val tryAgainButton = dialogView.findViewById<Button>(R.id.dialog_try_again_button)
+        tryAgainButton.setOnClickListener {
             alertDialog.dismiss()
         }
 
