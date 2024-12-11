@@ -42,6 +42,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        supportActionBar?.hide()
+
         firebaseAuth = FirebaseAuth.getInstance()
 
         // Cek apakah pengguna sudah login
@@ -67,7 +69,6 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.navigation_home -> {
                     openFragment(HomeFragment())
-                    supportActionBar?.title = "Home"
                     true
                 }
 

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+
+    android:padding="16dp"
+    android:gravity="center">
+
+    <!-- Judul -->
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Snap Tips"
+        android:textSize="18sp"
+        android:textStyle="bold"
+
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Gambar Contoh Baik -->
+    <ImageView
+        android:id="@+id/dialog_good_image"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@drawable/snap1"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Label Gambar Baik -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Berikut adalah contoh yang buruk:"
+        android:textSize="14sp"
+
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Gambar Contoh Buruk -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp"
+        >
+
+        <!-- Gambar Buruk 1 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/dialog_bad_image_1"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/snap3"
+                android:scaleType="centerCrop"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Terlalu Jauh"
+                android:textSize="12sp"
+                 />
+        </LinearLayout>
+
+        <!-- Gambar Buruk 2 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/dialog_bad_image_2"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/snap4"
+                android:scaleType="centerCrop"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Blur"
+                android:textSize="12sp"
+               />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Tombol Got It -->
+    <Button
+        android:id="@+id/dialog_button_got_it"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selesai"
+        android:backgroundTint="@color/green"
+
+        android:layout_gravity="center_horizontal" />
+</LinearLayout>

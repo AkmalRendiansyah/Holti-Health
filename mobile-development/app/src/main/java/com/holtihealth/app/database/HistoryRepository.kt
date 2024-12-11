@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 
 class HistoryRepository(private val historyDao: HistoryDao) {
 
-    val allHistory: LiveData<List<History>> = historyDao.getAllHistory()
-
     suspend fun insertHistory(history: History) {
         historyDao.insertHistory(history)
     }
@@ -14,5 +12,9 @@ class HistoryRepository(private val historyDao: HistoryDao) {
 
     fun getHistoryDetail(historyId: Int): LiveData<HistoryWithDisease> {
         return historyDao.getHistoryById(historyId)
+    }
+
+    suspend fun deleteHistory(historyId: Int) {
+        historyDao.deleteHistoryById(historyId)
     }
 }

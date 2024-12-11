@@ -10,27 +10,28 @@ import com.holtihealth.app.database.History
 import com.holtihealth.app.database.HistoryWithDisease
 import com.holtihealth.app.databinding.ItemHistoryBinding
 
-class HistoryAdapter(private  val onHistoryClick: (HistoryWithDisease) -> Unit) :
-    ListAdapter<HistoryWithDisease, HistoryAdapter.HistoryViewHolder>(DIFF_CALLBACK) {
+class HistoryAdapter(
+    private val onHistoryClick: (HistoryWithDisease) -> Unit,
+    private val onDeleteClick: (HistoryWithDisease) -> Unit
+) : ListAdapter<HistoryWithDisease, HistoryAdapter.HistoryViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
         val binding = ItemHistoryBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
-        return HistoryViewHolder(binding)
+        return HistoryViewHolder(binding, onHistoryClick, onDeleteClick)
     }
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
         val historyItem = getItem(position)
         holder.bind(historyItem)
-        holder.itemView.setOnClickListener{
-            onHistoryClick(historyItem)
-        }
-
     }
 
-    class HistoryViewHolder(private val binding: ItemHistoryBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class HistoryViewHolder(
+        private val binding: ItemHistoryBinding,
+        private val onHistoryClick: (HistoryWithDisease) -> Unit,
+        private val onDeleteClick: (HistoryWithDisease) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(historyWithDisease: HistoryWithDisease) {
             val history = historyWithDisease.history
@@ -46,6 +47,16 @@ class HistoryAdapter(private  val onHistoryClick: (HistoryWithDisease) -> Unit) 
             Glide.with(binding.root.context)
                 .load(history.photoUri)
                 .into(binding.photoUri)
+
+            // Item click listener
+            binding.root.setOnClickListener {
+                onHistoryClick(historyWithDisease)
+            }
+
+            // Delete button listener
+            binding.ivDelete.setOnClickListener {
+                onDeleteClick(historyWithDisease)
+            }
         }
     }
 

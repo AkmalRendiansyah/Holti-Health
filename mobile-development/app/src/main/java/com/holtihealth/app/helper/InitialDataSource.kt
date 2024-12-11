@@ -671,7 +671,7 @@ object InitialDataSource {
         """.trimIndent()
             ),
             Disease(
-                name = "Thrips & Tungau",
+                name = "Thrips",
                 symptoms = """
             Hama ini menyerang tanaman dengan menghisap cairan permukaan bawah daun (terutama daun-daun muda). Serangan ditandai dengan adanya bercak keperak-perakkan. Daun yang terserang berubah warna menjadi coklat tembaga, mengeriting atau keriput dan akhirnya mati. Pada serangan berat menyebabkan daun, tunas atau pucuk menggulung ke dalam dan muncul benjolan seperti tumor, pertumbuhan tanaman terhambat dan kerdil bahkan pucuk tanaman menjadi mati. Hama ini merupakan vektor penyakit virus mosaik dan virus keriting. 
             Pada musim kemarau perkembangan hama sangat cepat, sehingga populasi lebih tinggi sedangkan pada musim penghujan populasinya akan berkurang karena banyak thrips yang mati akibat tercuci oleh air hujan. Hama ini bersifat polifag dengan tanaman inang utama cabai, bawang merah, bawang daun, jenis bawang lainnya dan tomat, sedangkan tanaman inang lainnya tembakau, kopi, ubi jalar, waluh, bayam, kentang, kapas, tanaman dari famili Crusiferae, Crotalaria dan kacang-kacangan.

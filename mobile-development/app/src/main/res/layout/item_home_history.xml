@@ -3,11 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
+    android:orientation="vertical"
     app:cardCornerRadius="4dp"
-    app:strokeColor="@color/border"
-    app:strokeWidth="0.1dp">
+    style="?attr/materialCardViewElevatedStyle"
+    app:cardUseCompatPadding="true">
     
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -32,6 +31,7 @@
             android:layout_marginTop="5dp"
             android:textStyle="bold"
             android:textSize="16sp"
+            android:textColor="?attr/colorOnSurface"
             app:layout_constraintStart_toEndOf="@+id/ivHistory"
             app:layout_constraintTop_toTopOf="parent" />
 

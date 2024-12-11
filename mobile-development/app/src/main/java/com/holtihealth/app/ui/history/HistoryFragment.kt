@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,11 +36,20 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        historyAdapter = HistoryAdapter { historyWithDisease ->
-            val intent = Intent(context, DetailHistoryActivity::class.java)
-            intent.putExtra("HISTORY_ID", historyWithDisease.history.id)
-            startActivity(intent)
-        }
+        val toolbar = binding.toolbar
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "History"
+
+        historyAdapter = HistoryAdapter(
+            onHistoryClick = { historyWithDisease ->
+                val intent = Intent(context, DetailHistoryActivity::class.java)
+                intent.putExtra("HISTORY_ID", historyWithDisease.history.id)
+                startActivity(intent)
+            },
+            onDeleteClick = { historyWithDisease ->
+                showDeleteConfirmationDialog(historyWithDisease.history.id)
+            }
+        )
 
 
         binding.rvHistory.apply {
@@ -61,6 +71,21 @@ class HistoryFragment : Fragment() {
             }
         }
     }
+
+    private fun showDeleteConfirmationDialog(historyId: Int) {
+        val context = requireContext()
+        val builder = androidx.appcompat.app.AlertDialog.Builder(context)
+        builder.setTitle("Delete Confirmation")
+            .setMessage("Are you sure you want to delete this history?")
+            .setPositiveButton("Yes") { _, _ ->
+                historyViewModel.deleteHistory(historyId)
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+        builder.create().show()
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

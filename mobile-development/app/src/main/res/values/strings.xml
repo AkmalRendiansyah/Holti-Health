@@ -44,6 +44,8 @@
     <string name="scan_now">Scan Sekarang</string>
     <string name="login">Login</string>
     <string name="invalid_email_error">Format email tidak sesuai</string>
+    <string name="history">History</string>
+    <string name="article">Article</string>
 
 
 </resources>

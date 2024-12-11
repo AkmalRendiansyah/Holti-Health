@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.holtihealth.app.R
 import com.holtihealth.app.databinding.FragmentProfileBinding
@@ -39,6 +40,10 @@ class ProfileFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val toolbar = binding.toolbar
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "Profile"
 
         firebaseAuth = FirebaseAuth.getInstance()
 
