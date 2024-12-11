@@ -43,7 +43,7 @@ class ProfileFragment : Fragment() {
 
         val toolbar = binding.toolbar
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        (activity as? AppCompatActivity)?.supportActionBar?.title = "Profile"
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "Profil"
 
         firebaseAuth = FirebaseAuth.getInstance()
 

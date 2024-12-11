@@ -15,6 +15,7 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import com.holtihealth.app.MainActivity
 import com.holtihealth.app.R
 import com.holtihealth.app.createCustomTempFile
 import com.holtihealth.app.databinding.ActivityCameraBinding
@@ -40,6 +41,12 @@ class CameraActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         startCamera()
+
+        binding.closeCamera.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish() // Optional: menutup CameraActivity setelah berpindah ke MainActivity
+        }
 
         binding.buttonSnapTips.setOnClickListener {
             showSnapTipsDialog()
@@ -85,7 +92,6 @@ class CameraActivity : AppCompatActivity() {
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     val savedUri = Uri.fromFile(photoFile)
-                    Toast.makeText(applicationContext, "Photo saved to $savedUri", Toast.LENGTH_SHORT).show()
                     openPreviewActivity(savedUri, true)
                 }
 
@@ -121,5 +127,13 @@ class CameraActivity : AppCompatActivity() {
 
         alertDialog.show()
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish() // Tutup `ResultActivity` agar tidak kembali saat tombol "back" ditekan lagi
+        return true
+    }
+
 
 }

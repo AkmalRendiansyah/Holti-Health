@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -49,6 +50,13 @@ class PreviewActivity : AppCompatActivity(), ImageClassifierHelper.ClassifierLis
 
         imageUri?.let {
             binding.previewImageView.setImageURI(it)
+
+            // Adjust ScaleType based on source
+            if (isFromCamera) {
+                binding.previewImageView.scaleType = ImageView.ScaleType.CENTER_CROP
+            } else {
+                binding.previewImageView.scaleType = ImageView.ScaleType.FIT_CENTER
+            }
         }
 
         binding.buttonSnapTips.setOnClickListener {

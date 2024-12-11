@@ -3,9 +3,9 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="title_history">History</string>
-    <string name="title_article">Article</string>
-    <string name="title_profile">Profile</string>
+    <string name="title_history">Riwayat</string>
+    <string name="title_article">Artikel</string>
+    <string name="title_profile">Profil</string>
     <string name="Scan">Scan</string>
     <string name="scan">Scan</string>
     <string name="signup">Daftar</string>
@@ -16,9 +16,9 @@
     <string name="message_welcome_page1">Holti Health hadir untuk membantu Anda mengenali dan mengatasi penyakit pada tanaman cabai. Tingkatkan hasil panen Anda dengan teknologi pintar!</string>
     <string name="title_welcome_page2">Mari Mulai Bersama Holti Health!</string>
     <string name="message_welcome_page2">Tekan tombol di bawah untuk memulai analisis tanaman cabai Anda. Bersama Holti Health, langkah kecil Anda hari ini membawa panen besar esok hari!</string>
-    <string name="choose_again">Choose Again</string>
-    <string name="photos">Photos</string>
-    <string name="retake">Retake</string>
+    <string name="choose_again">Pilih Ulang</string>
+    <string name="photos">Gallery</string>
+    <string name="retake">Ambil Ulang</string>
     <string name="image_scan">image scan</string>
     <string name="text_result">text_result</string>
     <string name="disease_name">disease name</string>
@@ -27,7 +27,7 @@
     <string name="title">Title</string>
     <string name="description">description</string>
     <string name="register">Register</string>
-    <string name="recent_diagnoze">Recent Diagnoze</string>
+    <string name="recent_diagnoze">Riwayat Diagnosa</string>
     <string name="belum_ada_history">Belum Ada History</string>
 
     <string name="email">Email</string>
@@ -44,8 +44,6 @@
     <string name="scan_now">Scan Sekarang</string>
     <string name="login">Login</string>
     <string name="invalid_email_error">Format email tidak sesuai</string>
-    <string name="history">History</string>
-    <string name="article">Article</string>
 
 
 </resources>

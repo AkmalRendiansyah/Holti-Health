@@ -48,6 +48,7 @@ class ImageClassifierHelper(
                 withContext(Dispatchers.Main) {
                     if (response.status == "success") {
                         classifierListener.onResults(response.prediction ?: "Unknown", response.confidence ?: "")
+                        Log.e("Image Classifier", "confidience : ${response.prediction}")
                     } else {
                         classifierListener.onError("Error: ${response.message}")
                     }

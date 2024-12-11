@@ -38,7 +38,7 @@ class ArticleFragment : Fragment() {
 
         val toolbar = binding.toolbar
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        (activity as? AppCompatActivity)?.supportActionBar?.title = "Article"
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "Artikel"
 
         articleAdapter = ArticleAdapter { article ->
             val intent = Intent(context, DetailArticleActivity::class.java)

@@ -13,8 +13,11 @@ interface HistoryDao {
     @Query("SELECT * FROM history WHERE id = :historyId")
     fun getHistoryById(historyId: Int): LiveData<HistoryWithDisease>
 
-    @Query("SELECT * FROM history ORDER BY scanTime DESC")
+    @Query("SELECT * FROM history ORDER BY id DESC")
     fun getAllHistoryWithDisease(): LiveData<List<HistoryWithDisease>>
+
+    @Query("SELECT * FROM history ORDER BY id DESC LIMIT 8")
+    fun getAllHistoryWithDiseaseHome(): LiveData<List<HistoryWithDisease>>
 
     @Query("DELETE FROM history WHERE id = :historyId")
     suspend fun deleteHistoryById(historyId: Int)

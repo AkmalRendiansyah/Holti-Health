@@ -12,5 +12,5 @@ class HomeViewModel(private val articleRepository: ArticleRepository, private va
 
     fun getAllArticles(): LiveData<List<Article>> = articleRepository.getAllArticles()
 
-    fun allHistoryWithDisease() : LiveData<List<HistoryWithDisease>> = historyRepository.getAllHistoryWithDisease()
+    fun allHistoryWithDisease() : LiveData<List<HistoryWithDisease>> = historyRepository.getAllHistoryWithDiseaseHome()
 }

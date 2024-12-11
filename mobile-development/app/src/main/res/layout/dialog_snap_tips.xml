@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
 
     android:padding="16dp"
@@ -20,13 +21,20 @@
         android:layout_marginBottom="16dp" />
 
     <!-- Gambar Contoh Baik -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:layout_marginBottom="8dp">
+
     <ImageView
         android:id="@+id/dialog_good_image"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:src="@drawable/snap1"
-        android:scaleType="centerCrop"
-        android:layout_marginBottom="8dp" />
+        android:scaleType="centerCrop"/>
+
+    </com.google.android.material.card.MaterialCardView>
 
     <!-- Label Gambar Baik -->
     <TextView
@@ -34,7 +42,7 @@
         android:layout_height="wrap_content"
         android:text="Berikut adalah contoh yang buruk:"
         android:textSize="14sp"
-
+        android:layout_marginTop="14dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="16dp" />
 
@@ -54,13 +62,20 @@
             android:orientation="vertical"
             android:gravity="center">
 
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp"
+                android:layout_marginBottom="4dp">
+
             <ImageView
                 android:id="@+id/dialog_bad_image_1"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/snap3"
-                android:scaleType="centerCrop"
-                android:layout_marginBottom="4dp" />
+                android:scaleType="centerCrop"/>
+
+            </com.google.android.material.card.MaterialCardView>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -78,13 +93,20 @@
             android:orientation="vertical"
             android:gravity="center">
 
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp"
+                android:layout_marginBottom="4dp">
+
             <ImageView
                 android:id="@+id/dialog_bad_image_2"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/snap4"
-                android:scaleType="centerCrop"
-                android:layout_marginBottom="4dp" />
+                android:scaleType="centerCrop" />
+
+            </com.google.android.material.card.MaterialCardView>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -100,7 +122,8 @@
         android:id="@+id/dialog_button_got_it"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Selesai"
+        android:textAllCaps="false"
+        android:text="Got it"
         android:backgroundTint="@color/green"
 
         android:layout_gravity="center_horizontal" />
