@@ -1,5 +1,6 @@
 package com.holtihealth.app.helper
 
+import com.holtihealth.app.R
 import com.holtihealth.app.database.Article
 import com.holtihealth.app.database.Disease
 
@@ -8,7 +9,7 @@ object InitialDataSource {
         return listOf(
             Article(
                 title = "Penyakit Antraknosa pada Cabai",
-                image = "https://www.infarm.co.id/uploads/article/Xgg0sUuJn8IqiQHSGgWonRojj31w7moyiXdSVLOa.jpg",
+                image = R.drawable.penyakit_antraknosa,
                 description = """
             Penyakit antraknos adalah salah satu penyakit yang paling merugikan pada tanaman cabai. Penyakit ini disebabkan oleh jamur dari genus Colletotrichum, yang dapat menyerang berbagai bagian tanaman, seperti buah, daun, dan batang. Antraknos dikenal karena kerusakannya yang signifikan, terutama pada buah cabai yang siap panen, sehingga dapat menyebabkan kerugian ekonomi yang besar bagi petani.
              
@@ -82,7 +83,7 @@ object InitialDataSource {
             ),
             Article(
                 title = "Penyakit Layu Fusarium pada Cabai",
-                image = "https://trubus.id/wp-content/uploads/2020/02/Trubus-Edisi-603-Februari-2020-Highrest-78-2.jpg",
+                image = R.drawable.layu,
                 description = """
            Penyakit layu fusarium adalah salah satu penyakit serius yang menyerang tanaman cabai. Penyakit ini disebabkan oleh jamur Fusarium oxysporum f.sp. capsici, yang menyerang sistem perakaran tanaman. Layu fusarium menyebabkan tanaman cabai layu mendadak, daun menguning, dan akhirnya mati. Penyakit ini sulit diatasi jika sudah menyerang, sehingga pencegahan dan pengelolaan yang baik menjadi kunci utama.
            
@@ -161,7 +162,7 @@ object InitialDataSource {
             ),
             Article(
                 title = "Penyakit Bercak Daun Cabai",
-                image = "https://asset.kompas.com/crops/PecRmY2jQCZ0CWNcMRmdvinTr6k=/0x77:375x452/340x340/data/photo/2022/11/28/63847b2635b1f.jpg",
+                image = R.drawable.bercak,
                 description = """
             Penyakit bercak daun pada cabai adalah salah satu masalah utama yang dapat mengurangi produktivitas tanaman. Penyakit ini disebabkan oleh infeksi jamur atau bakteri yang menyerang daun cabai, sehingga menghambat proses fotosintesis dan pertumbuhan tanaman. Jika tidak ditangani dengan baik, bercak daun dapat menyebabkan kerontokan daun dan penurunan hasil panen.
             
@@ -247,7 +248,7 @@ object InitialDataSource {
             ),
             Article(
                 title = "Penyakit Busuk Buah Antraknosa ",
-                image = "https://bumikita.id/img/img_artikel/ca15310f591eb3d1a424af8441338051.jpg",
+                image = R.drawable.busuk_buah,
                 description = """
            Busuk buah antraknosa adalah salah satu penyakit paling merugikan pada cabai yang menyebabkan buah membusuk, baik saat masih di tanaman maupun setelah dipanen. Penyakit ini disebabkan oleh infeksi jamur Colletotrichum spp., terutama Colletotrichum capsici dan Colletotrichum gloeosporioides. Penyakit ini tidak hanya menurunkan kualitas dan kuantitas hasil panen tetapi juga berdampak langsung pada nilai ekonomi cabai, baik untuk konsumsi lokal maupun ekspor.
            
@@ -329,7 +330,7 @@ object InitialDataSource {
             ),
             Article(
                 title = "Penyakit kutu daun ",
-                image = "https://content.peat-cloud.com/w600/aphid-pepper-4.jpg",
+                image = R.drawable.kutu_daun,
                 description = """
            Kutu daun adalah salah satu hama utama yang sering menyerang tanaman cabai. Hama ini dapat menyebabkan kerusakan langsung pada tanaman serta menjadi vektor berbagai penyakit virus. Kutu daun menyerang dengan cara mengisap cairan dari daun, batang, dan bunga, sehingga menghambat pertumbuhan tanaman. Serangan kutu daun yang tidak terkendali dapat mengurangi hasil panen cabai secara signifikan.
 
@@ -399,7 +400,7 @@ object InitialDataSource {
             ),
             Article(
                 title = "Penyakit Trips Dan Tungau ",
-                image = "https://mitalom.com/wp-content/uploads/2017/06/Gambar-Ciri-ciri-Daun-Cabai-Terserang-Tungau.jpg",
+                image = R.drawable.tungau,
                 description = """
            Trips dan tungau adalah dua hama utama yang menyerang tanaman cabai. Kedua hama ini menyerang bagian daun, bunga, dan buah dengan cara mengisap cairan sel tanaman. Serangan yang parah tidak hanya menyebabkan kerusakan fisik pada tanaman, tetapi juga menurunkan hasil panen secara signifikan. Trips juga dapat menjadi vektor penyakit virus yang berbahaya bagi cabai.
            
@@ -488,7 +489,7 @@ object InitialDataSource {
             ),
             Article(
                 title = "Penyakit Virus Kuning ",
-                image = "https://asset.kompas.com/crops/P1BicoTdkVlPKqfuZAS1C2aaByU=/100x67:900x600/750x500/data/photo/2023/02/02/63db17d6a7ca1.jpg",
+                image = R.drawable.virus_kuning,
                 description = """
            Virus kuning atau dikenal juga sebagai penyakit kuning pada cabai merupakan salah satu ancaman serius dalam budidaya cabai. Penyakit ini disebabkan oleh infeksi virus seperti Tomato Yellow Leaf Curl Virus (TYLCV) dan Chilli Veinal Mottle Virus (ChiVMV), yang ditularkan oleh serangga vektor seperti kutu kebul (Bemisia tabaci) dan kutu daun (Aphis gossypii). Penyakit ini mengakibatkan perubahan warna daun, pertumbuhan terhambat, dan penurunan hasil panen secara drastis.
            
@@ -576,7 +577,7 @@ object InitialDataSource {
             ),
             Article(
                 title = "Hama Ulat Tanah ",
-                image = "https://2.bp.blogspot.com/-LP9zhFBTdHg/WJFLMyjJRVI/AAAAAAAAAyQ/vwkIrGrCmxI6gl4zNfzgf_jbpNQuyBZngCLcB/s1600/ulat%2Bgrayak.jpg",
+                image = R.drawable.ulat_tanah,
                 description = """
            Ulat tanah merupakan salah satu hama penting yang menyerang tanaman cabai, terutama pada fase pembibitan dan awal pertumbuhan. Hama ini sering menyerang bagian pangkal batang hingga menyebabkan tanaman roboh dan mati. Jenis ulat tanah yang paling umum ditemukan adalah Agrotis ipsilon (ulat grayak tanah).
            
