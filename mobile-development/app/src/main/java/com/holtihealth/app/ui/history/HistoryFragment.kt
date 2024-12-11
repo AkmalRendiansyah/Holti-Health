@@ -38,7 +38,7 @@ class HistoryFragment : Fragment() {
 
         val toolbar = binding.toolbar
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        (activity as? AppCompatActivity)?.supportActionBar?.title = "History"
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "Riwayat"
 
         historyAdapter = HistoryAdapter(
             onHistoryClick = { historyWithDisease ->
@@ -75,12 +75,12 @@ class HistoryFragment : Fragment() {
     private fun showDeleteConfirmationDialog(historyId: Int) {
         val context = requireContext()
         val builder = androidx.appcompat.app.AlertDialog.Builder(context)
-        builder.setTitle("Delete Confirmation")
-            .setMessage("Are you sure you want to delete this history?")
-            .setPositiveButton("Yes") { _, _ ->
+        builder.setTitle("Hapus Riwayat")
+            .setMessage("Apakah Anda yakin ingin menghapus riwayat ini?")
+            .setPositiveButton("Ya") { _, _ ->
                 historyViewModel.deleteHistory(historyId)
             }
-            .setNegativeButton("No") { dialog, _ ->
+            .setNegativeButton("Tidak") { dialog, _ ->
                 dialog.dismiss()
             }
         builder.create().show()

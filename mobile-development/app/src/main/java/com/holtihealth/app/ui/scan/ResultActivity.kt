@@ -5,6 +5,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toolbar
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -12,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.holtihealth.app.MainActivity
 import com.holtihealth.app.MyApplication
+import com.holtihealth.app.R
 import com.holtihealth.app.ViewModelFactory
 import com.holtihealth.app.database.History
 import com.holtihealth.app.databinding.ActivityResultBinding
@@ -36,25 +40,23 @@ class ResultActivity : AppCompatActivity() {
     private val resultViewModel: ResultViewModel by viewModels {
         ViewModelFactory(diseaseRepository = myApplication.diseaseRepository)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.hide()
+        val toolbar = binding.toolbar
+        setSupportActionBar(toolbar)
+        supportActionBar?.apply {
+            title = "Hasil" // Set title for the screen
+            setDisplayHomeAsUpEnabled(true) // Enable back button
+        }
 
         val resultText = intent.getStringExtra("resultText") ?: "No result"
         val imageUriString = intent.getStringExtra("imageUri")
 
         binding.resultTextView.text = resultText
-        binding.backButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-            startActivity(intent)
-            finish()
-        }
-
 
         if (imageUriString != null) {
             val imageUri = Uri.parse(imageUriString)
@@ -65,13 +67,12 @@ class ResultActivity : AppCompatActivity() {
             Log.e("ResultActivity", "No imageUri received!")
         }
 
-        resultViewModel.getDiseaseDetails(resultText).observe(this, Observer { disease ->
+        resultViewModel.getDiseaseDetails(resultText).observe(this) { disease ->
             if (disease != null) {
                 binding.indicationText.text = disease.symptoms
                 binding.controlText.text = disease.control
 
-                val formattedTime = formatToIndonesianTime((System.currentTimeMillis()))
-
+                val formattedTime = formatToIndonesianTime(System.currentTimeMillis())
                 val imageUri = Uri.parse(imageUriString)
                 val fileName = "result_image_${System.currentTimeMillis()}.jpg"
                 val imagePath = saveImageToInternalStorage(this, imageUri, fileName)
@@ -89,6 +90,42 @@ class ResultActivity : AppCompatActivity() {
                 binding.indicationText.text = "Data gejala tidak ditemukan."
                 binding.controlText.text = "Data pengendalian tidak ditemukan."
             }
-        })
+        }
+    }
+
+    // Handle back button in action bar
+    override fun onSupportNavigateUp(): Boolean {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish() // Tutup `ResultActivity` agar tidak kembali saat tombol "back" ditekan lagi
+        return true
+    }
+
+    override fun onBackPressed() {
+        // Mengarahkan pengguna kembali ke MainActivity dan menutup ResultActivity
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()  // Menutup ResultActivity agar tidak dapat kembali
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.result_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_camera -> {
+                startCameraX()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun startCameraX() {
+        val intent = Intent(this, CameraActivity::class.java)
+        startActivity(intent)
     }
 }

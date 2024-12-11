@@ -40,10 +40,15 @@ class DetailHistoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        supportActionBar?.hide()
-
         binding = ActivityDetailHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val toolbar = binding.toolbar
+        setSupportActionBar(toolbar)
+        supportActionBar?.apply {
+            title = "Riwayat" // Set title for the screen
+            setDisplayHomeAsUpEnabled(true) // Enable back button
+        }
 
         // Observe data detail
         detailHistoryViewModel.getDetail.observe(this) { historyWithDisease ->
@@ -65,5 +70,10 @@ class DetailHistoryActivity : AppCompatActivity() {
             .into(binding.resultImageView)
 
         Log.d("DetailHistoryActivity", "photoUri: ${history.photoUri}")
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
     }
 }

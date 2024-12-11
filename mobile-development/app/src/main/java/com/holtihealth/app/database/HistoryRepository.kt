@@ -10,6 +10,8 @@ class HistoryRepository(private val historyDao: HistoryDao) {
 
     fun getAllHistoryWithDisease(): LiveData<List<HistoryWithDisease>> = historyDao.getAllHistoryWithDisease()
 
+    fun getAllHistoryWithDiseaseHome(): LiveData<List<HistoryWithDisease>> = historyDao.getAllHistoryWithDiseaseHome()
+
     fun getHistoryDetail(historyId: Int): LiveData<HistoryWithDisease> {
         return historyDao.getHistoryById(historyId)
     }

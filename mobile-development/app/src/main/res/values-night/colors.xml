@@ -12,7 +12,6 @@
     <color name="border">#F8F5F5</color>
     <color name="black_transparent">#80000000</color>
 
-    <color name="card_stroke_color">#E0E0E0</color>
-
+    <color name="card_stroke_color">#424242</color>
 
 </resources>
