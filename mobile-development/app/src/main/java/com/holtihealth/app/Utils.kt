@@ -1,15 +1,10 @@
 package com.holtihealth.app
 
-import android.content.ContentValues
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
-import android.os.Build
-import android.os.Environment
-import android.provider.MediaStore
-import androidx.core.content.FileProvider
 import androidx.exifinterface.media.ExifInterface
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -23,13 +18,6 @@ private const val MAXIMAL_SIZE = 1000000 //1 MB
 private const val FILENAME_FORMAT = "yyyyMMdd_HHmmss"
 private val timeStamp: String = SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(Date())
 
-fun getImageUri(context: Context): Uri {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-        getImageUriForQAndAbove(context)
-    } else {
-        getImageUriForPreQ(context)
-    }
-}
 
 fun saveImageToInternalStorage(context: Context, uri: Uri, fileName: String): String? {
     return try {
@@ -74,7 +62,7 @@ fun Bitmap.getRotatedBitmap(file: File): Bitmap? {
     }
 }
 
-fun rotateImage(source: Bitmap, angle: Float): Bitmap? {
+fun rotateImage(source: Bitmap, angle: Float): Bitmap {
     val matrix = Matrix()
     matrix.postRotate(angle)
     return Bitmap.createBitmap(
@@ -85,32 +73,6 @@ fun rotateImage(source: Bitmap, angle: Float): Bitmap? {
 fun formatToIndonesianTime(timestamp: Long): String{
     val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale("id", "ID"))
     return dateFormat.format(timestamp)
-}
-
-private fun getImageUriForQAndAbove(context: Context): Uri {
-    val contentValues = ContentValues().apply {
-        put(MediaStore.MediaColumns.DISPLAY_NAME, "$timeStamp.jpg")
-        put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-        put(MediaStore.MediaColumns.RELATIVE_PATH, "Pictures/MyCamera/")
-    }
-
-    return context.contentResolver.insert(
-        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-        contentValues
-    ) ?: throw IllegalStateException("Failed to create URI for image")
-}
-
-private fun getImageUriForPreQ(context: Context): Uri {
-    val filesDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-    val imageFile = File(filesDir, "MyCamera/$timeStamp.jpg")
-    if (!imageFile.parentFile?.exists()!!) {
-        imageFile.parentFile?.mkdirs()
-    }
-    return FileProvider.getUriForFile(
-        context,
-        "${BuildConfig.APPLICATION_ID}.fileprovider",
-        imageFile
-    )
 }
 
 fun createCustomTempFile(context: Context): File {

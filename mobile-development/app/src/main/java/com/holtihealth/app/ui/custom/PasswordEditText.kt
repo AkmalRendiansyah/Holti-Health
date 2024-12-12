@@ -1,4 +1,4 @@
-package com.holtihealth.app.ui.cutom
+package com.holtihealth.app.ui.custom
 
 import android.content.Context
 import android.text.Editable
@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
 import com.holtihealth.app.R
 
-class CustomEmailEditText : AppCompatEditText {
+class PasswordEditText : AppCompatEditText {
 
     constructor(context: Context) : super(context) {
         init()
@@ -30,19 +30,14 @@ class CustomEmailEditText : AppCompatEditText {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (!isEmailValid(s.toString())) {
-                    setError(context.getString(R.string.invalid_email_error), null)
-                }
-                else {
+                if (s.toString().length < 8) {
+                    setError(context.getString(R.string.password_error), null)
+                } else {
                     error = null
                 }
             }
 
             override fun afterTextChanged(s: Editable?) {}
         })
-    }
-
-    private fun isEmailValid(email: String): Boolean {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 }

@@ -1,12 +1,13 @@
-package com.holtihealth.app.ui.scan
+package com.holtihealth.app.helper
 
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Log
+import com.holtihealth.app.R
 import com.holtihealth.app.reduceFileImage
-import com.holtihealth.app.retrofit.ApiConfig
+import com.holtihealth.app.network.ApiConfig
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -25,13 +26,13 @@ class ImageClassifierHelper(
     fun classifyImage(imageUri: Uri) {
         val bitmap = uriToBitmap(imageUri)
         if (bitmap == null) {
-            classifierListener.onError("Error: Unable to load image.")
+            classifierListener.onError(context.getString(R.string.error_unable_to_load_image))
             return
         }
 
         val imageFile = bitmapToFile(bitmap, "temp_image.jpg")
         if (imageFile == null) {
-            classifierListener.onError("Error: Unable to process image.")
+            classifierListener.onError(context.getString(R.string.error_unable_to_process_image))
             return
         }
 
@@ -40,29 +41,31 @@ class ImageClassifierHelper(
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val requestBody = reducedImageFile.asRequestBody("image/jpeg".toMediaTypeOrNull())
-                val multipartBody = MultipartBody.Part.createFormData("file", reducedImageFile.name, requestBody)
+                val multipartBody =
+                    MultipartBody.Part.createFormData("file", reducedImageFile.name, requestBody)
 
                 val apiService = ApiConfig.getApiService()
                 val response = apiService.uploadImage(multipartBody)
 
                 withContext(Dispatchers.Main) {
                     if (response.status == "success") {
-                        classifierListener.onResults(response.prediction ?: "Unknown", response.confidence ?: "")
-                        Log.e("Image Classifier", "confidience : ${response.prediction}")
+                        classifierListener.onResults(
+                            response.prediction ?: "Unknown",
+                            response.confidence ?: ""
+                        )
                     } else {
                         classifierListener.onError("Error: ${response.message}")
                     }
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Log.e("ImageClassifierHelper", "Parsing error: ${e.message}")
                     classifierListener.onError("Error: ${e.message}")
                 }
             }
         }
     }
 
-    private fun bitmapToFile(bitmap: Bitmap, fileName: String): File? {
+    private fun bitmapToFile(bitmap: Bitmap, fileName: String = "temp_image.jpg"): File? {
         return try {
             val file = File(context.cacheDir, fileName)
             val outputStream = FileOutputStream(file)
@@ -71,7 +74,6 @@ class ImageClassifierHelper(
             outputStream.close()
             file
         } catch (e: Exception) {
-            Log.e("ImageClassifierHelper", "bitmapToFile: ${e.message}")
             null
         }
     }

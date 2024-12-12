@@ -26,12 +26,12 @@ class ArticleAdapter(private val onArticleClick: (Article) -> Unit) :
         }
     }
 
-    class ArticleViewHolder(private val binding: ItemArticleBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ArticleViewHolder(private val binding: ItemArticleBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(article: Article) {
             binding.tvTitle.text = article.title
             binding.tvDescription.text = article.description
 
-            // Load image with Glide
             Glide.with(binding.root.context)
                 .load(article.image)
                 .into(binding.ivArticle)

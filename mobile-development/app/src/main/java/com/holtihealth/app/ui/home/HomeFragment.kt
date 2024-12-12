@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.holtihealth.app.MyApplication
+import com.holtihealth.app.R
 import com.holtihealth.app.ViewModelFactory
 import com.holtihealth.app.databinding.FragmentHomeBinding
 import com.holtihealth.app.ui.detailArticle.DetailArticleActivity
@@ -45,50 +46,25 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupRecyclerViews()
-
-        // Setup the Toolbar
-        // Setup the Toolbar
         val toolbar = binding.toolbar
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        (activity as? AppCompatActivity)?.supportActionBar?.title = "Apa Kabar!"
+        (activity as? AppCompatActivity)?.supportActionBar?.title = getString(R.string.whats_up)
+
+        setupRecyclerViews()
 
         firebaseAuth = FirebaseAuth.getInstance()
         val user = firebaseAuth.currentUser
         if (user != null) {
-            val username = user.displayName ?: "Nama belum diset"
+            val username = user.displayName ?: getString(R.string.name_not_filled)
             binding.toolbarSubtitle.text = username
         } else {
-            Toast.makeText(requireContext(), "Pengguna tidak ditemukan", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.user_not_found), Toast.LENGTH_SHORT)
+                .show()
         }
 
-
-        // Set up button click listener
         binding.scanNowButton.setOnClickListener {
             val intent = Intent(context, CameraActivity::class.java)
             startActivity(intent)
-        }
-
-        articleItemAdapter = ArticleItemAdapter { article ->
-            val intent = Intent(context, DetailArticleActivity::class.java)
-            intent.putExtra("ARTICLE_ID", article.id)
-            startActivity(intent)
-        }
-
-        binding.rvArticle.apply {
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            adapter = articleItemAdapter
-        }
-
-        historyItemAdapter = HistoryItemAdapter { historyWithDisease ->
-            val intent = Intent(context, DetailHistoryActivity::class.java)
-            intent.putExtra("HISTORY_ID", historyWithDisease.history.id)
-            startActivity(intent)
-        }
-
-        binding.rvHistory.apply {
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            adapter = historyItemAdapter
         }
 
         homeViewModel.getAllArticles().observe(viewLifecycleOwner) { articles ->
@@ -108,7 +84,29 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerViews() {
-        // Recycler view setup code here (already included above)
+        articleItemAdapter = ArticleItemAdapter { article ->
+            val intent = Intent(context, DetailArticleActivity::class.java)
+            intent.putExtra("ARTICLE_ID", article.id)
+            startActivity(intent)
+        }
+
+        binding.rvArticle.apply {
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = articleItemAdapter
+        }
+
+        historyItemAdapter = HistoryItemAdapter { historyWithDisease ->
+            val intent = Intent(context, DetailHistoryActivity::class.java)
+            intent.putExtra("HISTORY_ID", historyWithDisease.history.id)
+            startActivity(intent)
+        }
+
+        binding.rvHistory.apply {
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            adapter = historyItemAdapter
+        }
     }
 
     override fun onDestroyView() {

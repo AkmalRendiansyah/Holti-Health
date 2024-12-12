@@ -6,12 +6,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
@@ -40,7 +36,7 @@
             android:name=".ui.detailArticle.DetailArticleActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.scan.ResultActivity"
+            android:name=".ui.result.ResultActivity"
             android:exported="false" />
         <activity
             android:name=".ui.scan.PreviewActivity"
@@ -71,5 +67,4 @@
                 android:resource="@xml/file_paths" />
         </provider>
     </application>
-
 </manifest>

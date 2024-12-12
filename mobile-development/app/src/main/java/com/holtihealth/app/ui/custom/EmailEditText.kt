@@ -1,12 +1,13 @@
-package com.dicoding.picodiploma.loginwithanimation.view.custom
+package com.holtihealth.app.ui.custom
 
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
+import com.holtihealth.app.R
 
-class PasswordEditText : AppCompatEditText {
+class CustomEmailEditText : AppCompatEditText {
 
     constructor(context: Context) : super(context) {
         init()
@@ -29,8 +30,8 @@ class PasswordEditText : AppCompatEditText {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s.toString().length < 8) {
-                    setError("Password tidak boleh kurang dari 8 karakter", null)
+                if (!isEmailValid(s.toString())) {
+                    setError(context.getString(R.string.invalid_email_error), null)
                 } else {
                     error = null
                 }
@@ -38,5 +39,9 @@ class PasswordEditText : AppCompatEditText {
 
             override fun afterTextChanged(s: Editable?) {}
         })
+    }
+
+    private fun isEmailValid(email: String): Boolean {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 }

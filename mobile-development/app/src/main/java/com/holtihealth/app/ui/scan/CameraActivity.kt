@@ -26,11 +26,12 @@ class CameraActivity : AppCompatActivity() {
     private lateinit var imageCapture: ImageCapture
     private lateinit var preview: Preview
 
-    private val openGalleryLauncher = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        uri?.let {
-            openPreviewActivity(it, false)
+    private val openGalleryLauncher =
+        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            uri?.let {
+                openPreviewActivity(it, false)
+            }
         }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +46,7 @@ class CameraActivity : AppCompatActivity() {
         binding.closeCamera.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-            finish() // Optional: menutup CameraActivity setelah berpindah ke MainActivity
+            finish()
         }
 
         binding.buttonSnapTips.setOnClickListener {
@@ -77,7 +78,7 @@ class CameraActivity : AppCompatActivity() {
                 this, CameraSelector.DEFAULT_BACK_CAMERA, preview, imageCapture
             )
 
-            preview.setSurfaceProvider(binding.textureView.surfaceProvider)
+            preview.surfaceProvider = binding.textureView.surfaceProvider
         }, ContextCompat.getMainExecutor(this))
     }
 
@@ -96,7 +97,11 @@ class CameraActivity : AppCompatActivity() {
                 }
 
                 override fun onError(exception: ImageCaptureException) {
-                    Toast.makeText(applicationContext, "Error capturing image: ${exception.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        applicationContext,
+                        getString(R.string.error_capturing, exception.message),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             })
     }
@@ -131,7 +136,7 @@ class CameraActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        finish() // Tutup `ResultActivity` agar tidak kembali saat tombol "back" ditekan lagi
+        finish()
         return true
     }
 

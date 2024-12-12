@@ -7,7 +7,6 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
@@ -16,6 +15,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.holtihealth.app.R
 import com.holtihealth.app.databinding.ActivityPreviewBinding
+import com.holtihealth.app.helper.ImageClassifierHelper
+import com.holtihealth.app.ui.result.ResultActivity
 
 class PreviewActivity : AppCompatActivity(), ImageClassifierHelper.ClassifierListener {
 
@@ -24,11 +25,12 @@ class PreviewActivity : AppCompatActivity(), ImageClassifierHelper.ClassifierLis
     private var isFromCamera: Boolean = false
     private var progressDialog: AlertDialog? = null
 
-    private val openGalleryLauncher = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        uri?.let {
-            openPreviewActivity(it, false)
+    private val openGalleryLauncher =
+        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            uri?.let {
+                openPreviewActivity(it, false)
+            }
         }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +53,6 @@ class PreviewActivity : AppCompatActivity(), ImageClassifierHelper.ClassifierLis
         imageUri?.let {
             binding.previewImageView.setImageURI(it)
 
-            // Adjust ScaleType based on source
             if (isFromCamera) {
                 binding.previewImageView.scaleType = ImageView.ScaleType.CENTER_CROP
             } else {
@@ -70,7 +71,7 @@ class PreviewActivity : AppCompatActivity(), ImageClassifierHelper.ClassifierLis
             if (imageUri != null) {
                 analyzeImage(imageUri)
             } else {
-                Toast.makeText(this, "Gambar tidak ditemukan.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.image_not_find), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -81,11 +82,14 @@ class PreviewActivity : AppCompatActivity(), ImageClassifierHelper.ClassifierLis
             return
         }
         try {
-            showProgressDialog("Sedang menganalisis gambar...")
+            showProgressDialog(getString(R.string.analyze_image))
             imageClassifierHelper.classifyImage(uri)
         } catch (e: Exception) {
             hideProgressDialog()
-            Toast.makeText(this, "Gagal menganalisis gambar: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this,
+                getString(R.string.erro_analyze_image, e.message), Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -135,31 +139,29 @@ class PreviewActivity : AppCompatActivity(), ImageClassifierHelper.ClassifierLis
         hideProgressDialog()
 
         val confidenceScore = confidence.replace("%", "").toFloatOrNull() ?: 0f
-        Log.d("PreviewActivity", "Confidence Score: $confidenceScore")
 
-        if (confidenceScore < 90f) { // Bandingkan dengan 50
+        if (confidenceScore < 90f) {
             showLowConfidenceDialog()
             return
         }
 
-
         val imageUri = intent.getStringExtra("imageUri")
         val intent = Intent(this, ResultActivity::class.java)
         intent.putExtra("resultText", predictedLabel)
-        intent.putExtra("confidenceScore", confidence)
         intent.putExtra("imageUri", imageUri)
         startActivity(intent)
     }
 
     override fun onError(error: String) {
         hideProgressDialog()
-        Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+        showNoInternetDialog()
     }
 
     override fun onDestroy() {
         hideProgressDialog()
         super.onDestroy()
     }
+
     private fun showNoInternetDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_no_internet, null)
         val alertDialog = AlertDialog.Builder(this)
@@ -174,12 +176,15 @@ class PreviewActivity : AppCompatActivity(), ImageClassifierHelper.ClassifierLis
 
         alertDialog.show()
     }
+
     private fun isInternetAvailable(): Boolean {
-        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val network = connectivityManager.activeNetwork
         val capabilities = connectivityManager.getNetworkCapabilities(network)
         return capabilities != null && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
+
     private fun showSnapTipsDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_snap_tips, null)
         val alertDialog = AlertDialog.Builder(this)
@@ -195,6 +200,7 @@ class PreviewActivity : AppCompatActivity(), ImageClassifierHelper.ClassifierLis
 
         alertDialog.show()
     }
+
     private fun showLowConfidenceDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_low_confidence, null)
         val alertDialog = AlertDialog.Builder(this)

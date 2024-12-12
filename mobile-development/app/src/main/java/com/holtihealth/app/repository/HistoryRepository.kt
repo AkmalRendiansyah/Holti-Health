@@ -1,6 +1,9 @@
-package com.holtihealth.app.database
+package com.holtihealth.app.repository
 
 import androidx.lifecycle.LiveData
+import com.holtihealth.app.database.History
+import com.holtihealth.app.database.HistoryDao
+import com.holtihealth.app.database.HistoryWithDisease
 
 class HistoryRepository(private val historyDao: HistoryDao) {
 
@@ -8,9 +11,11 @@ class HistoryRepository(private val historyDao: HistoryDao) {
         historyDao.insertHistory(history)
     }
 
-    fun getAllHistoryWithDisease(): LiveData<List<HistoryWithDisease>> = historyDao.getAllHistoryWithDisease()
+    fun getAllHistoryWithDisease(): LiveData<List<HistoryWithDisease>> =
+        historyDao.getAllHistoryWithDisease()
 
-    fun getAllHistoryWithDiseaseHome(): LiveData<List<HistoryWithDisease>> = historyDao.getAllHistoryWithDiseaseHome()
+    fun getAllHistoryWithDiseaseHome(): LiveData<List<HistoryWithDisease>> =
+        historyDao.getAllHistoryWithDiseaseHome()
 
     fun getHistoryDetail(historyId: Int): LiveData<HistoryWithDisease> {
         return historyDao.getHistoryById(historyId)

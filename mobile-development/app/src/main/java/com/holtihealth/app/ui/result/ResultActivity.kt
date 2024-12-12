@@ -1,16 +1,13 @@
-package com.holtihealth.app.ui.scan
+package com.holtihealth.app.ui.result
 
-import android.content.Context
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toolbar
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.holtihealth.app.MainActivity
@@ -21,19 +18,15 @@ import com.holtihealth.app.database.History
 import com.holtihealth.app.databinding.ActivityResultBinding
 import com.holtihealth.app.formatToIndonesianTime
 import com.holtihealth.app.saveImageToInternalStorage
-import com.holtihealth.app.ui.history.HistoryFragment
+import com.holtihealth.app.ui.scan.CameraActivity
 import kotlinx.coroutines.launch
-import java.io.File
-import java.io.FileOutputStream
-import java.io.InputStream
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 class ResultActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultBinding
 
     private val myApplication by lazy {
-        application as? MyApplication ?: throw IllegalStateException("Application is not an instance of MyApplication")
+        application as? MyApplication
+            ?: throw IllegalStateException(getString(R.string.throw_application))
     }
 
     private val historyRepository by lazy { myApplication.historyRepository }
@@ -49,8 +42,8 @@ class ResultActivity : AppCompatActivity() {
         val toolbar = binding.toolbar
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
-            title = "Hasil" // Set title for the screen
-            setDisplayHomeAsUpEnabled(true) // Enable back button
+            title = getString(R.string.result)
+            setDisplayHomeAsUpEnabled(true)
         }
 
         val resultText = intent.getStringExtra("resultText") ?: "No result"
@@ -58,14 +51,10 @@ class ResultActivity : AppCompatActivity() {
 
         binding.resultTextView.text = resultText
 
-        if (imageUriString != null) {
-            val imageUri = Uri.parse(imageUriString)
-            Glide.with(this)
-                .load(imageUri)
-                .into(binding.resultImageView)
-        } else {
-            Log.e("ResultActivity", "No imageUri received!")
-        }
+        val imageUri = Uri.parse(imageUriString)
+        Glide.with(this)
+            .load(imageUri)
+            .into(binding.resultImageView)
 
         resultViewModel.getDiseaseDetails(resultText).observe(this) { disease ->
             if (disease != null) {
@@ -73,41 +62,46 @@ class ResultActivity : AppCompatActivity() {
                 binding.controlText.text = disease.control
 
                 val formattedTime = formatToIndonesianTime(System.currentTimeMillis())
-                val imageUri = Uri.parse(imageUriString)
+
+                val diseaseImageUri = Uri.parse(imageUriString)
+
                 val fileName = "result_image_${System.currentTimeMillis()}.jpg"
-                val imagePath = saveImageToInternalStorage(this, imageUri, fileName)
+                val imagePath = saveImageToInternalStorage(this, diseaseImageUri, fileName)
 
                 val history = History(
                     scanTime = formattedTime,
                     photoUri = imagePath ?: "",
                     diseaseId = disease.id
                 )
+
                 lifecycleScope.launch {
                     historyRepository.insertHistory(history)
                 }
 
             } else {
-                binding.indicationText.text = "Data gejala tidak ditemukan."
-                binding.controlText.text = "Data pengendalian tidak ditemukan."
+                binding.indicationText.text = getString(R.string.symptoms_not_find)
+                binding.controlText.text = getString(R.string.control_not_find)
             }
         }
     }
 
-    // Handle back button in action bar
     override fun onSupportNavigateUp(): Boolean {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        finish() // Tutup `ResultActivity` agar tidak kembali saat tombol "back" ditekan lagi
+        finish()
         return true
     }
 
+    @Deprecated(
+        "This method has been deprecated in favor of using OnBackPressedDispatcher.",
+        ReplaceWith("getOnBackPressedDispatcher().onBackPressed()")
+    )
+    @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
-        // Mengarahkan pengguna kembali ke MainActivity dan menutup ResultActivity
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        finish()  // Menutup ResultActivity agar tidak dapat kembali
+        finish()
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.result_menu, menu)
@@ -120,6 +114,7 @@ class ResultActivity : AppCompatActivity() {
                 startCameraX()
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }

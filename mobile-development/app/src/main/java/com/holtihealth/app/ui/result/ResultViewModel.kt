@@ -1,9 +1,9 @@
-package com.holtihealth.app.ui.scan
+package com.holtihealth.app.ui.result
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.holtihealth.app.database.Disease
-import com.holtihealth.app.database.DiseaseRepository
+import com.holtihealth.app.repository.DiseaseRepository
 
 class ResultViewModel(private val diseaseRepository: DiseaseRepository) : ViewModel() {
 

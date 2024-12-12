@@ -43,7 +43,8 @@
         android:backgroundTint="@color/green"
         android:tint="@color/white"
         android:layout_height="wrap_content"
-        app:layout_anchor="@id/bottomBar" />
+        app:layout_anchor="@id/bottomBar"
+        android:contentDescription="@string/scan_chili"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

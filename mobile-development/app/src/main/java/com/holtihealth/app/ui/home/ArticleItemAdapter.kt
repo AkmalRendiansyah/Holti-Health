@@ -14,7 +14,8 @@ class ArticleItemAdapter(private val onArticleClick: (Article) -> Unit) :
     ListAdapter<Article, ArticleItemAdapter.ArticleViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-        val binding = ItemHomeArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemHomeArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ArticleViewHolder(binding)
     }
 
@@ -26,12 +27,12 @@ class ArticleItemAdapter(private val onArticleClick: (Article) -> Unit) :
         }
     }
 
-    class ArticleViewHolder(private val binding: ItemHomeArticleBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ArticleViewHolder(private val binding: ItemHomeArticleBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(article: Article) {
             binding.tvTitle.text = article.title
             binding.tvDescription.text = article.description
 
-            // Load image with Glide
             Glide.with(binding.root.context)
                 .load(article.image)
                 .into(binding.ivArticle)

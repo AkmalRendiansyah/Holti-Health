@@ -51,7 +51,6 @@ class ArticleFragment : Fragment() {
             adapter = articleAdapter
         }
 
-        // Observe LiveData from ViewModel
         articleViewModel.getAllArticles().observe(viewLifecycleOwner) { articles ->
             articleAdapter.submitList(articles)
         }

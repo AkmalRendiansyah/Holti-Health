@@ -12,7 +12,8 @@
         app:layout_constraintBottom_toTopOf="@id/bottom_background"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="0dp"
+        android:contentDescription="@string/image_preview"/>
 
     <View
         android:id="@+id/bottom_background"
@@ -47,7 +48,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:tint="@color/green" />
+        app:tint="@color/green"
+        android:contentDescription="@string/analyze_image"/>
 
     <ImageButton
         android:id="@+id/button_snap_tips"
@@ -60,6 +62,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button_analyze_image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@color/green" />
+        app:tint="@color/green"
+        android:contentDescription="@string/snap_tips"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
