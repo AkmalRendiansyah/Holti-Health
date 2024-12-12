@@ -79,8 +79,7 @@ object InitialDataSource {
         """.trimIndent(),
 
 
-
-            ),
+                ),
             Article(
                 title = "Penyakit Layu Fusarium pada Cabai",
                 image = R.drawable.layu,
@@ -159,7 +158,7 @@ object InitialDataSource {
            Dengan menerapkan langkah-langkah di atas, petani dapat menjaga produktivitas tanaman cabai dan meminimalkan kerugian akibat penyakit layu fusarium. Mari budidayakan cabai secara berkelanjutan dengan pengelolaan yang baik!
         """.trimIndent(),
 
-            ),
+                ),
             Article(
                 title = "Penyakit Bercak Daun Cabai",
                 image = R.drawable.bercak,

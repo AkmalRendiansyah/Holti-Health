@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.holtihealth.app.MyApplication
+import com.holtihealth.app.R
 import com.holtihealth.app.ViewModelFactory
 import com.holtihealth.app.database.Article
 import com.holtihealth.app.databinding.ActivityDetailArticleBinding
@@ -14,14 +15,18 @@ class DetailArticleActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailArticleBinding
 
     private val myApplication by lazy {
-        application as? MyApplication ?: throw IllegalStateException("Application is not an instance of MyApplication")
+        application as? MyApplication
+            ?: throw IllegalStateException(getString(R.string.throw_application))
     }
 
     private val detailArticleViewModel: DetailArticleViewModel by lazy {
         val articleId = intent.getIntExtra("ARTICLE_ID", 0)
         ViewModelProvider(
             this,
-            ViewModelFactory(articleRepository = myApplication.articleRepository, articleId = articleId)
+            ViewModelFactory(
+                articleRepository = myApplication.articleRepository,
+                articleId = articleId
+            )
         )[DetailArticleViewModel::class.java]
     }
 
@@ -41,6 +46,7 @@ class DetailArticleActivity : AppCompatActivity() {
         }
 
     }
+
     private fun displayStoryDetails(article: Article) {
 
         binding.descriptionText.text = article.description
@@ -54,6 +60,5 @@ class DetailArticleActivity : AppCompatActivity() {
     @Suppress("DEPRECATION")
     override fun onBackPressed() {
         super.onBackPressed()
-        // Optionally, you can add a custom animation or logic here before finishing the activity
     }
 }

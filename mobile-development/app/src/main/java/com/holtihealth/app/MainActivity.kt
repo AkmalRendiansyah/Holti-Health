@@ -27,9 +27,9 @@ class MainActivity : AppCompatActivity() {
             ActivityResultContracts.RequestPermission()
         ) { isGranted: Boolean ->
             if (isGranted) {
-                showToast("Permission request granted")
+                showToast(getString(R.string.permission_granted))
             } else {
-                showToast("Permission request denied")
+                showToast(getString(R.string.permission_not_granted))
             }
         }
 
@@ -42,11 +42,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        supportActionBar?.hide()
-
         firebaseAuth = FirebaseAuth.getInstance()
 
-        // Cek apakah pengguna sudah login
         val currentUser = firebaseAuth.currentUser
         if (currentUser == null) {
             redirectToLogin()
@@ -59,10 +56,10 @@ class MainActivity : AppCompatActivity() {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)
         }
 
-        binding.fab.setOnClickListener { startCameraX()}
+        binding.fab.setOnClickListener { startCameraX() }
 
         if (savedInstanceState == null) {
-            openFragment(HomeFragment()) // This will show ArticleFragment first
+            openFragment(HomeFragment())
         }
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
@@ -74,17 +71,16 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.navigation_history -> {
                     openFragment(HistoryFragment())
-                    supportActionBar?.title = "History"
                     true
                 }
+
                 R.id.navigation_article -> {
                     openFragment(ArticleFragment())
-                    supportActionBar?.title = "Article"
                     true
                 }
+
                 R.id.navigation_profile -> {
                     openFragment(ProfileFragment())
-                    supportActionBar?.title = "Profile"
                     true
                 }
 
@@ -93,6 +89,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
     private fun redirectToLogin() {
         val intent = Intent(this, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
@@ -105,7 +102,7 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragmentContainerView, fragment)
             .commit()
     }
-    
+
     private fun startCameraX() {
         val intent = Intent(this, CameraActivity::class.java)
         startActivity(intent)

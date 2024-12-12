@@ -23,7 +23,8 @@
         app:layout_constraintTop_toTopOf="parent"
         android:scaleType="centerCrop"
         android:background="@color/transparent"
-        app:tint="?attr/colorOnSurface" />
+        app:tint="?attr/colorOnSurface"
+        android:contentDescription="@string/back"/>
 
     <View
         android:id="@+id/bottom_background"
@@ -58,7 +59,8 @@
         app:layout_constraintBottom_toBottomOf="@id/bottom_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:tint="@color/green" />
+        app:tint="@color/green"
+        android:contentDescription="@string/take_image"/>
 
     <ImageButton
         android:id="@+id/button_snap_tips"
@@ -71,5 +73,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button_take_picture"
-        app:tint="@color/green" />
+        app:tint="@color/green"
+        android:contentDescription="@string/tips"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

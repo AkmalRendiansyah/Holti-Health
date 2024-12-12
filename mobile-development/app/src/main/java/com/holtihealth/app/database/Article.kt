@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "article")
-data class Article (
+data class Article(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val title: String,
@@ -12,4 +12,4 @@ data class Article (
     var image: Int,
 
 
-)
+    )

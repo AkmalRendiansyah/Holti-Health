@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.holtihealth.app.MainActivity
+import com.holtihealth.app.R
 import com.holtihealth.app.databinding.ActivityLoginBinding
 import com.holtihealth.app.ui.register.RegisterActivity
 
@@ -38,23 +39,24 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
+
     private fun validateInputs(email: String, password: String): Boolean {
         if (email.isEmpty()) {
-            binding.emailEditTextLayout.error = "Email tidak boleh kosong"
+            binding.emailEditTextLayout.error = getString(R.string.error_email_empty)
             return false
         } else {
             binding.emailEditTextLayout.error = null
         }
 
         if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            binding.emailEditTextLayout.error = "Email tidak valid"
+            binding.emailEditTextLayout.error = getString(R.string.invalid_email)
             return false
         } else {
             binding.emailEditTextLayout.error = null
         }
 
         if (password.isEmpty()) {
-            binding.passwordEditTextLayout.error = "Password tidak boleh kosong"
+            binding.passwordEditTextLayout.error = getString(R.string.error_password_empty)
             return false
         } else {
             binding.passwordEditTextLayout.error = null
@@ -62,31 +64,30 @@ class LoginActivity : AppCompatActivity() {
 
         return true
     }
+
     private fun loginUser(email: String, password: String) {
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val user = firebaseAuth.currentUser
                     if (user != null && user.isEmailVerified) {
-                        // Email sudah diverifikasi, lanjut ke MainActivity
-                        Toast.makeText(this, "Login berhasil!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, getString(R.string.login_succes), Toast.LENGTH_SHORT)
+                            .show()
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                         finish()
                     } else {
-                        // Email belum diverifikasi
                         Toast.makeText(
                             this,
-                            "Akun belum diverifikasi. Periksa email Anda.",
+                            getString(R.string.account_not_verified),
                             Toast.LENGTH_SHORT
                         ).show()
-                        firebaseAuth.signOut() // Logout pengguna yang belum diverifikasi
+                        firebaseAuth.signOut()
                     }
                 } else {
-                    // Gagal login
                     Toast.makeText(
                         this,
-                        "Login gagal: ${task.exception?.message}",
+                        getString(R.string.login_failed, task.exception?.message),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

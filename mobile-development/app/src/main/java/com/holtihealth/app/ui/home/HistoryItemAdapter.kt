@@ -6,11 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.holtihealth.app.database.History
 import com.holtihealth.app.database.HistoryWithDisease
 import com.holtihealth.app.databinding.ItemHomeHistoryBinding
 
-class HistoryItemAdapter(private  val onHistoryClick: (HistoryWithDisease) -> Unit) :
+class HistoryItemAdapter(private val onHistoryClick: (HistoryWithDisease) -> Unit) :
     ListAdapter<HistoryWithDisease, HistoryItemAdapter.HistoryViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
@@ -23,7 +22,7 @@ class HistoryItemAdapter(private  val onHistoryClick: (HistoryWithDisease) -> Un
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
         val historyItem = getItem(position)
         holder.bind(historyItem)
-        holder.itemView.setOnClickListener{
+        holder.itemView.setOnClickListener {
             onHistoryClick(historyItem)
         }
 
@@ -36,13 +35,10 @@ class HistoryItemAdapter(private  val onHistoryClick: (HistoryWithDisease) -> Un
             val history = historyWithDisease.history
             val disease = historyWithDisease.disease
 
-            // Set disease name
             binding.diseaseName.text = disease.name
 
-            // Set scan time
             binding.scanTime.text = history.scanTime
 
-            // Set photo using Glide
             Glide.with(binding.root.context)
                 .load(history.photoUri)
                 .into(binding.ivHistory)

@@ -22,7 +22,6 @@ class WelcomeActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        // Cek apakah pengguna sudah login
         val currentUser = firebaseAuth.currentUser
         if (currentUser != null) {
             redirectToMain()
@@ -38,11 +37,13 @@ class WelcomeActivity : AppCompatActivity() {
             insets
         }
 
-        binding.button.setOnClickListener{
+        binding.button.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
-    } private fun redirectToMain() {
+    }
+
+    private fun redirectToMain() {
         val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)

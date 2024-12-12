@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.holtihealth.app.MyApplication
+import com.holtihealth.app.R
 import com.holtihealth.app.ViewModelFactory
 import com.holtihealth.app.databinding.FragmentHistoryBinding
 import com.holtihealth.app.ui.detailHistory.DetailHistoryActivity
@@ -38,7 +39,7 @@ class HistoryFragment : Fragment() {
 
         val toolbar = binding.toolbar
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        (activity as? AppCompatActivity)?.supportActionBar?.title = "Riwayat"
+        (activity as? AppCompatActivity)?.supportActionBar?.title = getString(R.string.story)
 
         historyAdapter = HistoryAdapter(
             onHistoryClick = { historyWithDisease ->
@@ -57,14 +58,11 @@ class HistoryFragment : Fragment() {
             adapter = historyAdapter
         }
 
-        // Observe LiveData
         historyViewModel.allHistoryWithDisease.observe(viewLifecycleOwner) { historyList ->
             if (historyList.isNullOrEmpty()) {
-                // Show "No history" message
                 binding.tvNoHistory.visibility = View.VISIBLE
                 binding.rvHistory.visibility = View.GONE
             } else {
-                // Hide "No history" message and show list
                 binding.tvNoHistory.visibility = View.GONE
                 binding.rvHistory.visibility = View.VISIBLE
                 historyAdapter.submitList(historyList)
@@ -75,12 +73,12 @@ class HistoryFragment : Fragment() {
     private fun showDeleteConfirmationDialog(historyId: Int) {
         val context = requireContext()
         val builder = androidx.appcompat.app.AlertDialog.Builder(context)
-        builder.setTitle("Hapus Riwayat")
-            .setMessage("Apakah Anda yakin ingin menghapus riwayat ini?")
-            .setPositiveButton("Ya") { _, _ ->
+        builder.setTitle(getString(R.string.delete_alert))
+            .setMessage(getString(R.string.are_you_sure_delete))
+            .setPositiveButton(getString(R.string.yes)) { _, _ ->
                 historyViewModel.deleteHistory(historyId)
             }
-            .setNegativeButton("Tidak") { dialog, _ ->
+            .setNegativeButton(getString(R.string.no)) { dialog, _ ->
                 dialog.dismiss()
             }
         builder.create().show()

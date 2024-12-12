@@ -33,7 +33,7 @@
         android:id="@+id/tvNoHistory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Belum ada history"
+        android:text="@string/no_history"
         android:visibility="gone"
         android:textSize="18sp"
         app:layout_constraintTop_toTopOf="parent"

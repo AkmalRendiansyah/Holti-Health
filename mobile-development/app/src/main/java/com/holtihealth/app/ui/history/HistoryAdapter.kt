@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.holtihealth.app.database.History
 import com.holtihealth.app.database.HistoryWithDisease
 import com.holtihealth.app.databinding.ItemHistoryBinding
 
@@ -37,23 +36,18 @@ class HistoryAdapter(
             val history = historyWithDisease.history
             val disease = historyWithDisease.disease
 
-            // Set disease name
             binding.diseaseName.text = disease.name
 
-            // Set scan time
             binding.tvItemPublishedDate.text = history.scanTime
 
-            // Set photo using Glide
             Glide.with(binding.root.context)
                 .load(history.photoUri)
                 .into(binding.photoUri)
 
-            // Item click listener
             binding.root.setOnClickListener {
                 onHistoryClick(historyWithDisease)
             }
 
-            // Delete button listener
             binding.ivDelete.setOnClickListener {
                 onDeleteClick(historyWithDisease)
             }

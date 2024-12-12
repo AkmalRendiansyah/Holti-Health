@@ -13,16 +13,15 @@ import androidx.room.Relation
         entity = Disease::class,
         parentColumns = ["id"],
         childColumns = ["diseaseId"],
-        onDelete = ForeignKey.CASCADE // Menghapus history jika disease terkait dihapus
+        onDelete = ForeignKey.CASCADE
     )]
 )
 data class History(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val scanTime: String,          // Waktu scan (timestamp)
-    val photoUri: String,        // URI gambar hasil scan
-    val diseaseId: Int           // Foreign key mengacu ke Disease
+    val scanTime: String,
+    val photoUri: String,
+    val diseaseId: Int
 )
-
 
 data class HistoryWithDisease(
     @Embedded val history: History,

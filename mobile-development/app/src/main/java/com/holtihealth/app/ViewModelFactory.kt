@@ -2,15 +2,15 @@ package com.holtihealth.app
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.holtihealth.app.database.ArticleRepository
-import com.holtihealth.app.database.DiseaseRepository
-import com.holtihealth.app.database.HistoryRepository
+import com.holtihealth.app.repository.ArticleRepository
+import com.holtihealth.app.repository.DiseaseRepository
+import com.holtihealth.app.repository.HistoryRepository
 import com.holtihealth.app.ui.article.ArticleViewModel
 import com.holtihealth.app.ui.detailArticle.DetailArticleViewModel
 import com.holtihealth.app.ui.detailHistory.DetailHistoryViewModel
 import com.holtihealth.app.ui.history.HistoryViewModel
 import com.holtihealth.app.ui.home.HomeViewModel
-import com.holtihealth.app.ui.scan.ResultViewModel
+import com.holtihealth.app.ui.result.ResultViewModel
 
 class ViewModelFactory(
     private val diseaseRepository: DiseaseRepository? = null,

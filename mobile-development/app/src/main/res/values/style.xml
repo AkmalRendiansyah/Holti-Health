@@ -8,7 +8,4 @@
         <item name="android:textSize">23sp</item>
         <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
-    <style name="CustomToolbarSubtitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
-        <item name="android:textSize">18sp</item> <!-- Ganti ukuran sesuai kebutuhan -->
-    </style>
 </resources>

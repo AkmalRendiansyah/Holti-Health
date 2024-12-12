@@ -43,7 +43,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -55,7 +54,6 @@ dependencies {
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.activity)
-    implementation(libs.tensorflow.lite.metadata)
     implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -65,23 +63,15 @@ dependencies {
     implementation (libs.androidx.camera.lifecycle)
     implementation (libs.androidx.camera.view)
 
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
 
-    implementation("androidx.room:room-runtime:2.5.2")
-    implementation("androidx.room:room-ktx:2.5.2")
-    ksp("androidx.room:room-compiler:2.5.2")
+    implementation (libs.glide.v4160)
 
-    implementation ("com.github.bumptech.glide:glide:4.16.0")
-
-    implementation ("org.tensorflow:tensorflow-lite:2.13.0")
-    implementation("com.google.android.gms:play-services-tflite-support:16.1.0")
-    implementation("org.tensorflow:tensorflow-lite-task-vision-play-services:0.4.2")
-    implementation("com.google.android.gms:play-services-tflite-gpu:16.2.0")
-    implementation("org.tensorflow:tensorflow-lite-gpu:2.11.0")
-    implementation("com.google.firebase:firebase-auth-ktx:23.1.0")
-
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
 }
